@@ -4,15 +4,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Dinesh Sikder's Portfolio" />
+    <meta name="description" content="Portfolio of Dinesh Sikder" />
     <meta name="author" content="Dinesh Sikder" />
-    <title>Dinesh Sikder - Portfolio</title>
+    <title>Dinesh Sikder - Associate Staff Engineer</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Font Awesome icons-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+        rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
 </head>
@@ -23,100 +24,247 @@
     <nav id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand"><a href="#page-top">Dinesh Sikder</a></li>
+            <li class="sidebar-nav-item"><a href="#page-top">Home</a></li>
             <li class="sidebar-nav-item"><a href="#about">About</a></li>
             <li class="sidebar-nav-item"><a href="#skills">Skills</a></li>
             <li class="sidebar-nav-item"><a href="#projects">Projects</a></li>
             <li class="sidebar-nav-item"><a href="#contact">Contact</a></li>
         </ul>
     </nav>
-
     <!-- Header-->
-    <header class="masthead text-center text-white d-flex align-items-center">
-        <div class="container">
+    <header class="masthead d-flex align-items-center">
+        <div class="container text-center">
             <div class="row">
-                <div class="col-lg-10 mx-auto">
-                    <h1 class="mb-1">Hi, I'm Dinesh Sikder</h1>
-                    <h3 class="mb-5"><em>Fullstack Developer & Associate Staff Engineer at Nagarro</em></h3>
-                    <a class="btn btn-primary btn-xl" href="#about">Learn More</a>
-                    <button onclick="window.open('assets/resume/dinesh_updated_resume.pdf');" class="btn btn-outline-light btn-xl ml-2">View Resume</button>
+                <div class="col-lg-10 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1">
+                    <h1>Hi !!👋🏻 I’m Dinesh Sikder</h1>
+                    <h2 class="typewrite" data-period="2000"
+                        data-type='["I am an Associate Staff Engineer at Nagarro.", "I am a Fullstack Developer.", "Passionate about technology and innovation."]'>
+                        <span class="wrap"></span>
+                    </h2>
+                    <button onclick="window.open('assets/resume/dinesh_updated_resume.pdf');"
+                        class="btn btn-primary btn-xl">Resume</button>
+                    <button onclick="window.open('https://www.linkedin.com/in/dinesh-sikder-42886111a/');"
+                        class="btn btn-secondary btn-xl">LinkedIn</button>
+                </div>
+                <div class="col-lg-2 order-1 order-lg-2 hero-img">
+                    <img src="assets/img/profile_pic.png" class="img-fluid" alt="Dinesh Sikder">
                 </div>
             </div>
         </div>
     </header>
-
     <!-- About-->
-    <section class="bg-light" id="about">
+    <section class="content-section bg-light" id="about">
         <div class="container text-center">
-            <h2>About Me</h2>
-            <p class="lead">I'm a passionate Fullstack Developer with a strong foundation in Java, Spring Boot, Node.js, and modern front-end frameworks. With experience in Microservices, CI/CD pipelines, and cloud technologies, I build scalable and efficient applications.</p>
-            <img class="rounded-circle" src="assets/img/dinesh.jpg" alt="Dinesh Sikder" width="200px" height="200px">
+            <div class="section-title">
+                <h2>About Me</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-4">
+                    <img class="rounded-circle" src="assets/img/dinesh.jpg" alt="Dinesh Sikder" height="300px" width="300px"
+                        style="object-fit: cover;">
+                </div>
+                <div class="col-lg-6">
+                    <p class="lead">
+                        I am Dinesh Sikder, completed B.Tech in Information Technology from <a
+                            href="http://gcect.ac.in/" target="_blank">Government College of Engineering and Ceramic
+                            Technology</a>, Kolkata. Currently, I work as an Associate Staff Engineer at <a
+                            href="https://www.nagarro.com/" target="_blank">Nagarro</a>.
+                    </p>
+                    <p class="lead">
+                        With over 5 years of experience in software development, I specialize in full-stack development,
+                        cloud computing, and DevOps. My passion lies in delivering high-quality software solutions using
+                        the latest technologies.
+                    </p>
+                    <a class="btn btn-secondary btn-xl" href="#services">More About Me</a>
+                </div>
+            </div>
         </div>
     </section>
-
     <!-- Skills-->
-    <section id="skills" class="text-white bg-dark">
-        <div class="container text-center">
-            <h2>Skills</h2>
+    <section id="skills" class="skills bg-primary text-white">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>Skills</h2>
+            </div>
             <div class="row">
-                <div class="col-lg-4">
-                    <h4>Programming Languages</h4>
-                    <p>Java, JavaScript, TypeScript, Python</p>
-                </div>
-                <div class="col-lg-4">
-                    <h4>Frameworks & Libraries</h4>
-                    <p>Spring Boot, Angular, React, Node.js, Quarkus</p>
-                </div>
-                <div class="col-lg-4">
-                    <h4>Tools & Platforms</h4>
-                    <p>Docker, Jenkins, GitHub Actions, AWS, Terraform</p>
+                <div class="col-lg-12 content">
+                    <h3>Technical Skills</h3>
+                    <div class="progress">
+                        <span class="skill">Java <i class="val">90%</i></span>
+                        <div class="progress-bar" style="width: 90%;"></div>
+                    </div>
+                    <div class="progress">
+                        <span class="skill">JavaScript <i class="val">80%</i></span>
+                        <div class="progress-bar" style="width: 80%;"></div>
+                    </div>
+                    <div class="progress">
+                        <span class="skill">TypeScript (Angular/React) <i class="val">85%</i></span>
+                        <div class="progress-bar" style="width: 85%;"></div>
+                    </div>
+                    <div class="progress">
+                        <span class="skill">Spring Boot <i class="val">80%</i></span>
+                        <div class="progress-bar" style="width: 80%;"></div>
+                    </div>
+                    <div class="progress">
+                        <span class="skill">Node.js <i class="val">75%</i></span>
+                        <div class="progress-bar" style="width: 75%;"></div>
+                    </div>
+                    <div class="progress">
+                        <span class="skill">Docker <i class="val">80%</i></span>
+                        <div class="progress-bar" style="width: 80%;"></div>
+                    </div>
+                    <div class="progress">
+                        <span class="skill">AWS <i class="val">85%</i></span>
+                        <div class="progress-bar" style="width: 85%;"></div>
+                    </div>
+                    <div class="progress">
+                        <span class="skill">Terraform <i class="val">70%</i></span>
+                        <div class="progress-bar" style="width: 70%;"></div>
+                    </div>
+                    <h3>Soft Skills</h3>
+                    <div class="progress">
+                        <span class="skill">Problem-Solving <i class="val">90%</i></span>
+                        <div class="progress-bar" style="width: 90%;"></div>
+                    </div>
+                    <div class="progress">
+                        <span class="skill">Communication <i class="val">85%</i></span>
+                        <div class="progress-bar" style="width: 85%;"></div>
+                    </div>
+                    <div class="progress">
+                        <span class="skill">Teamwork <i class="val">95%</i></span>
+                        <div class="progress-bar" style="width: 95%;"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- Projects-->
-    <section id="projects" class="bg-light">
-        <div class="container text-center">
-            <h2>Projects</h2>
+    <section class="content-section" id="projects">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>Projects</h2>
+            </div>
             <div class="row">
                 <div class="col-lg-4">
-                    <h4>Carbon Footprint Calculator</h4>
-                    <p>A web-based tool to estimate carbon emissions from daily activities, helping users reduce their environmental impact.</p>
+                    <div class="portfolio-item">
+                        <img class="img-fluid" src="assets/img/carbon-footprint.png" alt="Carbon Footprint Calculator" />
+                        <div class="caption">
+                            <div class="caption-content">
+                                <h3>Carbon Footprint Calculator</h3>
+                                <p>A tool to estimate carbon emissions from daily activities using React, Node.js, and AWS.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-4">
-                    <h4>Microservices Architecture</h4>
-                    <p>Developed a scalable microservices architecture for a complex web application, enabling independent service deployments.</p>
+                    <div class="portfolio-item">
+                        <img class="img-fluid" src="assets/img/property-store.png" alt="Property Store" />
+                        <div class="caption">
+                            <div class="caption-content">
+                                <h3>Property Store</h3>
+                                <p>Full-stack application for managing property listings with Angular and Spring Boot.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-4">
-                    <h4>CI/CD Pipelines</h4>
-                    <p>Automated build, test, and deployment pipelines using GitHub Actions and Jenkins, ensuring fast and reliable software delivery.</p>
+                    <div class="portfolio-item">
+                        <img class="img-fluid" src="assets/img/chatbot.png" alt="Chatbot Integration" />
+                        <div class="caption">
+                            <div class="caption-content">
+                                <h3>Chatbot Integration with AWS Lex</h3>
+                                <p>Developed a chatbot using AWS Lex and Lambda for customer service automation.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- Contact-->
-    <section id="contact" class="bg-dark text-white text-center">
+    <section id="contact" class="contact bg-light">
         <div class="container">
-            <h2>Contact Me</h2>
-            <p>If you're interested in my work or would like to collaborate, feel free to reach out!</p>
-            <p><strong>Email:</strong> <a href="mailto:sikder.dinesh2@gmail.com" class="text-white">sikder.dinesh2@gmail.com</a></p>
-            <p><strong>Location:</strong> Kolkata, India</p>
-            <div class="social-links">
-                <a href="https://github.com/Dineshsikder" class="text-white"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/dinesh-sikder-42886111a/" class="text-white"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:sikder.dinesh2@gmail.com" class="text-white"><i class="fas fa-envelope"></i></a>
+            <div class="section-title text-center">
+                <h2>Contact Me</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="info">
+                        <div class="address">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h4>Location:</h4>
+                            <p>Kolkata, India</p>
+                        </div>
+                        <div class="email">
+                            <i class="fas fa-envelope"></i>
+                            <h4>Email:</h4>
+                            <p><a href="mailto:sikder.dinesh2@gmail.com">sikder.dinesh2@gmail.com</a></p>
+                        </div>
+                        <div class="phone">
+                            <i class="fas fa-phone"></i>
+                            <h4>Call:</h4>
+                            <p><a href="tel:+919903561546">+91 9903561546</a></p>
+                        </div>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3681.353388886036!2d88.44077691399967!3d22.677884934815076!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f89f1e8212c8af%3A0x9bb9139c044a5eb3!2sBLUE%20BELL%20APARTMENT!5e0!3m2!1sen!2sin!4v1638895449523!5m2!1sen!2sin"
+                            width="100%" height="290px" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <form action="javascript:mail()" class="php-email-form">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="name">Your Name</label>
+                                <input type="text" name="name" class="form-control" id="name" autocomplete="off" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="email">Your Email</label>
+                                <input type="email" class="form-control" name="email" id="email" required autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" class="form-control" name="subject" id="subject" required autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control" name="message" id="message" rows="10" required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit">Send Message</button>
+                            <button type="reset">Reset</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
-
     <!-- Footer-->
-    <footer class="footer bg-dark text-white text-center">
+    <footer class="footer text-center">
         <div class="container">
-            <p class="mb-0">Copyright &copy; Dinesh Sikder 2024</p>
+            <ul class="list-inline mb-5">
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white" href="https://github.com/Dineshsikder"><i
+                            class="fab fa-github"></i></a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white" href="https://www.linkedin.com/in/dinesh-sikder-42886111a/"><i
+                            class="fab fa-linkedin-in"></i></a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white" href="mailto:sikder.dinesh2@gmail.com"><i
+                            class="fas fa-envelope"></i></a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white" href="https://twitter.com/dinesh_sikder"><i
+                            class="fab fa-twitter"></i></a>
+                </li>
+            </ul>
+            <p class="text-muted small mb-0">Made with ❤️ by Dinesh Sikder | © 2024 Dinesh Sikder</p>
         </div>
     </footer>
-
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
