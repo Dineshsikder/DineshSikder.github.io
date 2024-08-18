@@ -2,273 +2,591 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Portfolio of Dinesh Sikder" />
-    <meta name="author" content="Dinesh Sikder" />
-    <title>Dinesh Sikder - Associate Staff Engineer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinesh Sikder - Portfolio</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
-        rel="stylesheet" type="text/css" />
-    <!-- Core theme CSS (includes Bootstrap)-->
+    <!-- Google fonts and Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
     <link href="css/styles.css" rel="stylesheet" />
+    <script>(function (w, d) { w.CollectId = "61b3abd3ba60cc741a636c0f"; var h = d.head || d.getElementsByTagName("head")[0]; var s = d.createElement("script"); s.setAttribute("type", "text/javascript"); s.async = true; s.setAttribute("src", "https://collectcdn.com/launcher.js"); h.appendChild(s); })(window, document);</script>
 </head>
 
 <body id="page-top">
     <!-- Navigation-->
-    <a class="menu-toggle rounded" href="#"><i class="fas fa-bars"></i></a>
-    <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand"><a href="#page-top">Dinesh Sikder</a></li>
-            <li class="sidebar-nav-item"><a href="#page-top">Home</a></li>
-            <li class="sidebar-nav-item"><a href="#about">About</a></li>
-            <li class="sidebar-nav-item"><a href="#skills">Skills</a></li>
-            <li class="sidebar-nav-item"><a href="#projects">Projects</a></li>
-            <li class="sidebar-nav-item"><a href="#contact">Contact</a></li>
-        </ul>
+    <nav id="navbar" class="navbar">
+        <div class="nav-header">
+            <h2 style="color: #ffc107;">Portfolio</h2>
+            <ul>
+                <li><a href="#page-top"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="#skills"><i class="fas fa-lightbulb"></i> Skills</a></li>
+                <li><a href="#technology"><i class="fas fa-code"></i> Technologies</a></li>
+                <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
+                <li><a href="#github"><i class="fab fa-github"></i> GitHub Repos</a></li>
+                <li><a href="#resume"><i class="fas fa-file-alt"></i> Resume</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                <!-- <li><a href="#" id="toggle-mode"><i class="fas fa-adjust"></i> Toggle Mode</a></li> -->
+            </ul>
+        </div>
     </nav>
-    <!-- Header-->
-    <header class="masthead d-flex align-items-center">
-        <div class="container text-center">
-            <div class="row">
-                <div class="col-lg-10 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1">
-                    <h1>Hi !!👋🏻 I’m Dinesh Sikder</h1>
-                    <h2 class="typewrite" data-period="2000"
-                        data-type='["I am an Associate Staff Engineer at Nagarro.", "I am a Fullstack Developer.", "Passionate about technology and innovation."]'>
-                        <span class="wrap"></span>
-                    </h2>
-                    <button onclick="window.open('assets/resume/dinesh_updated_resume.pdf');"
-                        class="btn btn-primary btn-xl">Resume</button>
-                    <button onclick="window.open('https://www.linkedin.com/in/dinesh-sikder-42886111a/');"
-                        class="btn btn-secondary btn-xl">LinkedIn</button>
-                </div>
-                <div class="col-lg-2 order-1 order-lg-2 hero-img">
-                    <img src="assets/img/profile_pic.png" class="img-fluid" alt="Dinesh Sikder">
-                </div>
-            </div>
+
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="header-content text-center">
+            <h1 id="typingHeader"></h1>
+            <p id="typingSubheader" class="mt-2 bb-4"></p>
+            <br />
+            <a href="assets/resume/dinesh_updated_resume.pdf" class="btn-get-started mt-4">Resume</a>
         </div>
     </header>
-    <!-- About-->
-    <section class="content-section bg-light" id="about">
-        <div class="container text-center">
+
+
+    <!-- About Section -->
+    <section id="about" class="content-section about-section">
+        <div class="container fade-in">
             <div class="section-title">
                 <h2>About Me</h2>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-4">
-                    <img class="rounded-circle" src="assets/img/dinesh.jpg" alt="Dinesh Sikder" height="300px" width="300px"
-                        style="object-fit: cover;">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-center">
+                    <img class="about-img rounded-circle" src="assets/img/dinesh.jpg" alt="Dinesh Sikder">
                 </div>
-                <div class="col-lg-6">
-                    <p class="lead">
-                        I am Dinesh Sikder, completed B.Tech in Information Technology from <a
-                            href="http://gcect.ac.in/" target="_blank">Government College of Engineering and Ceramic
-                            Technology</a>, Kolkata. Currently, I work as an Associate Staff Engineer at <a
-                            href="https://www.nagarro.com/" target="_blank">Nagarro</a>.
-                    </p>
-                    <p class="lead">
-                        With over 5 years of experience in software development, I specialize in full-stack development,
-                        cloud computing, and DevOps. My passion lies in delivering high-quality software solutions using
-                        the latest technologies.
-                    </p>
-                    <a class="btn btn-secondary btn-xl" href="#services">More About Me</a>
+                <div class="col-lg-8">
+                    <p>I am Dinesh Sikder, completed B.Tech in Information Technology from <a href="http://gcect.ac.in/"
+                            target="_blank">Government College of Engineering and Ceramic Technology</a>, Kolkata.</p>
+                    <p>Currently working as Associate Staff Engineer at <a href="https://www.nagarro.com/"
+                            target="_blank">Nagarro</a>.</p>
+                    <button class="btn btn-primary mt-2" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#moreAboutMeSection" aria-expanded="false" aria-controls="moreAboutMeSection">
+                        More About Me
+                    </button>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Skills-->
-    <section id="skills" class="skills bg-primary text-white">
-        <div class="container">
-            <div class="section-title text-center">
+
+    <!-- More About Me Section (Academic Details) -->
+    <div class="collapse" id="moreAboutMeSection">
+        <section class="content-section services bg-primary text-white text-center" id="services">
+            <div class="content-section-heading">
+                <h2 class="text-secondary mb-5">ACADEMIC DETAILS</h2>
+            </div>
+            <div class="container-fluid" data-aos="fade-up">
+                <div class="row">
+                    <div class="container col-lg-6">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse"
+                                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            B.TECH. Information Technology
+                                        </button>
+                                    </h2>
+                                </div>
+
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                    data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <p class="lead mb-1 text-primary">
+                                            Government College of Engineering and Ceramic Technology
+                                        </p>
+                                        <p class="lead mb-1">
+                                            <strong style="font-weight: 100;">CGPA - </strong>7.96
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                            data-target="#collapseTwo" aria-expanded="false"
+                                            aria-controls="collapseTwo">
+                                            H.S.E
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                    data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <p class="lead mb-1 text-primary">
+                                            New Barrackpore Colony Boys' High School
+                                        </p>
+                                        <p class="lead mb-1">
+                                            <strong>Percentage - </strong>68%
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" id="headingThree">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                            data-target="#collapseThree" aria-expanded="false"
+                                            aria-controls="collapseThree">
+                                            S.E
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                    data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <p class="lead mb-1 text-primary">
+                                            Kodalia Agapore High School
+                                        </p>
+                                        <p class="lead mb-1">
+                                            <strong>Percentage - </strong>80%
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 align-items-stretch order-1 order-lg-2 img academic-img"
+                        style='background-image: url("assets/img/academic1.jpg"); background-size: cover;'
+                        data-aos="zoom-in" data-aos-delay="150">
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container slide-in">
+            <div class="section-title">
                 <h2>Skills</h2>
             </div>
             <div class="row">
-                <div class="col-lg-12 content">
-                    <h3>Technical Skills</h3>
+                <div class="col-lg-6">
+                    <div class="skill-title">Algorithm Coding</div>
                     <div class="progress">
-                        <span class="skill">Java <i class="val">90%</i></span>
-                        <div class="progress-bar" style="width: 90%;"></div>
+                        <div class="progress-bar" role="progressbar" style="width: 75%;">75%</div>
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-title">Data Structure</div>
                     <div class="progress">
-                        <span class="skill">JavaScript <i class="val">80%</i></span>
-                        <div class="progress-bar" style="width: 80%;"></div>
+                        <div class="progress-bar" role="progressbar" style="width: 70%;">70%</div>
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-title">HTML</div>
                     <div class="progress">
-                        <span class="skill">TypeScript (Angular/React) <i class="val">85%</i></span>
-                        <div class="progress-bar" style="width: 85%;"></div>
+                        <div class="progress-bar" role="progressbar" style="width: 50%;">50%</div>
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-title">CSS</div>
                     <div class="progress">
-                        <span class="skill">Spring Boot <i class="val">80%</i></span>
-                        <div class="progress-bar" style="width: 80%;"></div>
+                        <div class="progress-bar" role="progressbar" style="width: 40%;">40%</div>
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-title">JavaScript</div>
                     <div class="progress">
-                        <span class="skill">Node.js <i class="val">75%</i></span>
-                        <div class="progress-bar" style="width: 75%;"></div>
+                        <div class="progress-bar" role="progressbar" style="width: 50%;">50%</div>
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-title">TypeScript (Angular/React JS)</div>
                     <div class="progress">
-                        <span class="skill">Docker <i class="val">80%</i></span>
-                        <div class="progress-bar" style="width: 80%;"></div>
+                        <div class="progress-bar" role="progressbar" style="width: 80%;">80%</div>
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-title">SQL/NOSQL</div>
                     <div class="progress">
-                        <span class="skill">AWS <i class="val">85%</i></span>
-                        <div class="progress-bar" style="width: 85%;"></div>
+                        <div class="progress-bar" role="progressbar" style="width: 60%;">60%</div>
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-title">OOPS (JAVA)</div>
                     <div class="progress">
-                        <span class="skill">Terraform <i class="val">70%</i></span>
-                        <div class="progress-bar" style="width: 70%;"></div>
+                        <div class="progress-bar" role="progressbar" style="width: 80%;">80%</div>
                     </div>
-                    <h3>Soft Skills</h3>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-title">API</div>
                     <div class="progress">
-                        <span class="skill">Problem-Solving <i class="val">90%</i></span>
-                        <div class="progress-bar" style="width: 90%;"></div>
+                        <div class="progress-bar" role="progressbar" style="width: 80%;">80%</div>
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-title">Git</div>
                     <div class="progress">
-                        <span class="skill">Communication <i class="val">85%</i></span>
-                        <div class="progress-bar" style="width: 85%;"></div>
+                        <div class="progress-bar" role="progressbar" style="width: 85%;">85%</div>
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-title">Communication</div>
                     <div class="progress">
-                        <span class="skill">Teamwork <i class="val">95%</i></span>
-                        <div class="progress-bar" style="width: 95%;"></div>
+                        <div class="progress-bar" role="progressbar" style="width: 75%;">75%</div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-title">Teamwork</div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 99%;">99%</div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-title">Patience</div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 95%;">95%</div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-title">Accountability</div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 99%;">99%</div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-title">Positivity</div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 100%;">100%</div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-title">Problem-Solving</div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 85%;">85%</div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="skill-title">Curiosity</div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 95%;">95%</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Projects-->
-    <section class="content-section" id="projects">
+
+    <!-- Technologies Section -->
+    <section id="technology" class="tech-section">
+        <div class="container fade-in">
+            <div class="section-title">
+                <h2>Technologies/Framework</h2>
+            </div>
+            <div class="tech-gallery row">
+                <div class="col-lg-6 tech-item">
+                    <img src="assets/img/springboot.png" alt="Spring Boot">
+                    <div class="tech-caption">
+                        <h3>Spring Boot</h3>
+                        <p>Used to develop REST APIs, API Gateway with Spring Security, OAuth 2.0, JWT validation, etc.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 tech-item">
+                    <img src="assets/img/spring-microservices-security-arch.png" alt="Micro Services">
+                    <div class="tech-caption">
+                        <h3>Microservices</h3>
+                        <p>Implementing microservices architecture with Spring Cloud and Docker.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-gallery row">
+                <div class="col-lg-6 tech-item">
+                    <img src="assets/img/web.png" alt="Web Development">
+                    <div class="tech-caption">
+                        <h3>Web Development</h3>
+                        <p>Developing responsive websites and web applications using modern technologies.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 tech-item">
+                    <img src="assets/img/micro-frontends.jpg" alt="Micro Front End">
+                    <div class="tech-caption">
+                        <h3>Micro Frontend</h3>
+                        <p>Building scalable and maintainable frontend applications.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-gallery row">
+                <div class="col-lg-6 tech-item">
+                    <img src="assets/img/MVC-Node.webp" alt="Node.js">
+                    <div class="tech-caption">
+                        <h3>MVC Architecture in Node.js</h3>
+                        <p>Leverages Node.js and Express to implement the MVC (Model-View-Controller) architecture. The
+                            Model interacts with MongoDB using Mongoose, the Controller processes user requests, and the
+                            View renders the output. This architecture promotes modularity and maintainability in
+                            server-side applications.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 tech-item">
+                    <img src="assets/img/github_action.png" alt="CI/CD With GitHub Action">
+                    <div class="tech-caption">
+                        <h3>CI/CD With GitHub Action for Azure/Aws/GCP</h3>
+                        <p>Automating deployment processes using CI/CD pipelines with GitHub Actions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-gallery row">
+                <div class="col-lg-6 tech-item">
+                    <img src="assets/img/Quarkus-1200x780.png" alt="Quarkus">
+                    <div class="tech-caption">
+                        <h3>Quarkus</h3>
+                        <p>Building cloud-native Java applications with Quarkus.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 tech-item">
+                    <img src="assets/img/elk.png" alt="Logging">
+                    <div class="tech-caption">
+                        <h3>Logging</h3>
+                        <p>Centralized logging and monitoring using ELK Stack.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-gallery row">
+                <div class="col-lg-6 tech-item">
+                    <img src="assets/img/CI-CD-using-Jenkins-and-Docker.png" alt="CI/CD With Jenkins">
+                    <div class="tech-caption">
+                        <h3>CI/CD with Jenkins for Azure/Aws/GCP</h3>
+                        <p>Implementing continuous integration and continuous deployment pipelines with Jenkins and
+                            Docker.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 tech-item">
+                    <img src="assets/img/monitoring.png" alt="Monitoring">
+                    <div class="tech-caption">
+                        <h3>Monitoring</h3>
+                        <p>Using Prometheus and Grafana for real-time monitoring.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-gallery row">
+                <div class="col-lg-6 tech-item">
+                    <img src="assets/img/ExcelLexBot-2.gif" alt="ChatBot With Lex and Lambda">
+                    <div class="tech-caption">
+                        <h3>ChatBot with Lex and Lambda</h3>
+                        <p>Developing conversational bots using AWS Lex and Lambda.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 tech-item">
+                    <img src="assets/img/botpress.png" alt="ChatBot With Botpress">
+                    <div class="tech-caption">
+                        <h3>ChatBot with Botpress</h3>
+                        <p>Creating custom chatbots with Botpress.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-gallery row">
+                <div class="col-lg-6 tech-item">
+                    <img src="assets/img/terraform.png" alt="Terraform">
+                    <div class="tech-caption">
+                        <h3>Terraform</h3>
+                        <p>Infrastructure as Code with Terraform to manage cloud infrastructure.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 tech-item">
+                    <img src="assets/img/AIML.png" alt="Python, Flask, AI/ML">
+                    <div class="tech-caption">
+                        <h3>Python, Flask, AI/ML</h3>
+                        <p>The deployment of AI/ML models within a Docker container using Flask to serve a RESTful API.
+                            Clients interact with the model server via HTTP, allowing for seamless integration of
+                            machine learning models into applications.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
         <div class="container">
-            <div class="section-title text-center">
+            <div class="section-title">
                 <h2>Projects</h2>
             </div>
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="portfolio-item">
-                        <img class="img-fluid" src="assets/img/carbon-footprint.png" alt="Carbon Footprint Calculator" />
-                        <div class="caption">
-                            <div class="caption-content">
-                                <h3>Carbon Footprint Calculator</h3>
-                                <p>A tool to estimate carbon emissions from daily activities using React, Node.js, and AWS.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <h3>Project 1</h3>
+                    <p>Description of project 1.</p>
                 </div>
                 <div class="col-lg-4">
-                    <div class="portfolio-item">
-                        <img class="img-fluid" src="assets/img/property-store.png" alt="Property Store" />
-                        <div class="caption">
-                            <div class="caption-content">
-                                <h3>Property Store</h3>
-                                <p>Full-stack application for managing property listings with Angular and Spring Boot.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <h3>Project 2</h3>
+                    <p>Description of project 2.</p>
                 </div>
                 <div class="col-lg-4">
-                    <div class="portfolio-item">
-                        <img class="img-fluid" src="assets/img/chatbot.png" alt="Chatbot Integration" />
-                        <div class="caption">
-                            <div class="caption-content">
-                                <h3>Chatbot Integration with AWS Lex</h3>
-                                <p>Developed a chatbot using AWS Lex and Lambda for customer service automation.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <h3>Project 3</h3>
+                    <p>Description of project 3.</p>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Contact-->
-    <section id="contact" class="contact bg-light">
+
+    <!-- GitHub Repositories Section -->
+    <section id="github" class="github-section">
         <div class="container">
-            <div class="section-title text-center">
+            <div class="section-title">
+                <h2>GitHub Repos</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <h3>Repo 1</h3>
+                    <p>Description of repo 1.</p>
+                </div>
+                <div class="col-lg-4">
+                    <h3>Repo 2</h3>
+                    <p>Description of repo 2.</p>
+                </div>
+                <div class="col-lg-4">
+                    <h3>Repo 3</h3>
+                    <p>Description of repo 3.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="resume-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Resume</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Summary</h3>
+                    <p><strong>BRANDON JOHNSON</strong></p>
+                    <p>Innovative and deadline-driven Graphic Designer with 3+ years of experience designing and
+                        developing user-centered digital/print marketing material from initial concept to final,
+                        polished deliverable.</p>
+                    <ul>
+                        <li>Portland par 127, Orlando, FL</li>
+                        <li>(123) 456-7891</li>
+                        <li>alice.barkley@example.com</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h3>Professional Experience</h3>
+                    <h4>SENIOR GRAPHIC DESIGN SPECIALIST</h4>
+                    <h5>2019 - Present</h5>
+                    <p><strong>Experion, New York, NY</strong></p>
+                    <ul>
+                        <li>Lead in the design, development, and implementation of the graphic, layout, and production
+                            communication materials</li>
+                        <li>Delegate tasks to the 7 members of the design team and provide counsel on all aspects of the
+                            project.</li>
+                        <li>Supervise the assessment of all graphic materials in order to ensure quality and accuracy of
+                            the design</li>
+                        <li>Oversee the efficient use of production project budgets ranging from $2,000 - $25,000</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <h3>Education</h3>
+                    <h4>MASTER OF FINE ARTS & GRAPHIC DESIGN</h4>
+                    <h5>2015 - 2016</h5>
+                    <p><strong>Rochester Institute of Technology, Rochester, NY</strong></p>
+                    <p>Quia nobis nesciunt sit aspernatur. Est ad aliquam laborum tempore sed quisquam iusto autem sit.
+                        Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend</p>
+                </div>
+                <div class="col-md-6">
+                    <h3>GRAPHIC DESIGN SPECIALIST</h3>
+                    <h5>2017 - 2018</h5>
+                    <p><strong>Stepping Stone Advertising, New York, NY</strong></p>
+                    <ul>
+                        <li>Developed numerous marketing programs (logos, brochures,infographics, presentations, and
+                            advertisements).</li>
+                        <li>Managed up to 5 projects or tasks at a given time while under pressure</li>
+                        <li>Recommended and consulted with clients on the most appropriate graphic design</li>
+                        <li>Created 4+ design presentations and proposals a month for clients and account managers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container slide-in">
+            <div class="section-title">
                 <h2>Contact Me</h2>
             </div>
             <div class="row">
-                <div class="col-lg-5">
-                    <div class="info">
-                        <div class="address">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <h4>Location:</h4>
-                            <p>Kolkata, India</p>
+                <div class="d-flex flex-wrap align-items-stretch w-100">
+                    <div class="contact-info col-lg-6 d-flex flex-column">
+                        <div>
+                            <p><i class="fas fa-map-marker-alt"></i> Kolkata, India</p>
+                            <p><i class="fas fa-envelope"></i> <a
+                                    href="mailto:sikder.dinesh2@gmail.com">sikder.dinesh2@gmail.com</a></p>
+                            <p><i class="fas fa-phone"></i> <a href="tel:+919903561546">+91 9903561546</a></p>
                         </div>
-                        <div class="email">
-                            <i class="fas fa-envelope"></i>
-                            <h4>Email:</h4>
-                            <p><a href="mailto:sikder.dinesh2@gmail.com">sikder.dinesh2@gmail.com</a></p>
+                        <div class="flex-grow-1 d-flex align-items-stretch">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3681.389060918286!2d88.44241027406291!3d22.676556229154496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f89f104604befd%3A0x1c0bf82abca801ff!2sShanti%20Niwas!5e0!3m2!1sen!2sin!4v1723980921180!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
-                        <div class="phone">
-                            <i class="fas fa-phone"></i>
-                            <h4>Call:</h4>
-                            <p><a href="tel:+919903561546">+91 9903561546</a></p>
-                        </div>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3681.353388886036!2d88.44077691399967!3d22.677884934815076!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f89f1e8212c8af%3A0x9bb9139c044a5eb3!2sBLUE%20BELL%20APARTMENT!5e0!3m2!1sen!2sin!4v1638895449523!5m2!1sen!2sin"
-                            width="100%" height="290px" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
                     </div>
-                </div>
-                <div class="col-lg-7">
-                    <form action="javascript:mail()" class="php-email-form">
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="name">Your Name</label>
-                                <input type="text" name="name" class="form-control" id="name" autocomplete="off" />
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="email">Your Email</label>
-                                <input type="email" class="form-control" name="email" id="email" required autocomplete="off" />
-                            </div>
+                    <form action="javascript:mail()" class="php-email-form col-lg-6 d-flex flex-column">
+                        <div class="form-group">
+                            <input type="text" name="name" id="name" placeholder="Your Name" required />
                         </div>
                         <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" class="form-control" name="subject" id="subject" required autocomplete="off" />
+                            <input type="email" name="email" id="email" placeholder="Your Email" required />
                         </div>
                         <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea class="form-control" name="message" id="message" rows="10" required></textarea>
+                            <input type="text" name="subject" id="subject" placeholder="Subject" required />
                         </div>
-                        <div class="text-center">
-                            <button type="submit">Send Message</button>
-                            <button type="reset">Reset</button>
+                        <div class="form-group flex-grow-1">
+                            <textarea name="message" rows="10" id="message" placeholder="Message" required></textarea>
+                        </div>
+                        <div class="form-group text-center mt-auto">
+                            <button type="submit" class="btn btn-primary">Send Message</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Footer-->
-    <footer class="footer text-center">
+
+
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
-            <ul class="list-inline mb-5">
-                <li class="list-inline-item">
-                    <a class="social-link rounded-circle text-white" href="https://github.com/Dineshsikder"><i
-                            class="fab fa-github"></i></a>
+            <ul class="social-links">
+                <li><a href="https://github.com/Dineshsikder"><i class="fab fa-github"></i></a>
                 </li>
-                <li class="list-inline-item">
-                    <a class="social-link rounded-circle text-white" href="https://www.linkedin.com/in/dinesh-sikder-42886111a/"><i
-                            class="fab fa-linkedin-in"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="social-link rounded-circle text-white" href="mailto:sikder.dinesh2@gmail.com"><i
-                            class="fas fa-envelope"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="social-link rounded-circle text-white" href="https://twitter.com/dinesh_sikder"><i
-                            class="fab fa-twitter"></i></a>
-                </li>
+                <li><a href="https://www.linkedin.com/in/dinesh-sikder-42886111a/" style="color: #0077b5;"><i
+                            class="fab fa-linkedin"></i></a></li>
+                <li><a href="mailto:sikder.dinesh2@gmail.com" style="color: #d44638;"><i
+                            class="fas fa-envelope"></i></a></li>
+                <li><a href="https://www.instagram.com/dinesh_sikder/" style="color: #e4405f;"><i
+                            class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.facebook.com/dinesh.sikder1" style="color: #1877f2;"><i
+                            class="fab fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/dinesh_sikder" style="color: #1da1f2;"><i
+                            class="fab fa-twitter"></i></a></li>
             </ul>
-            <p class="text-muted small mb-0">Made with ❤️ by Dinesh Sikder | © 2024 Dinesh Sikder</p>
+            <p>&copy; Dinesh Sikder 2021. All Rights Reserved.</p>
         </div>
     </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
+
+
+    <!-- Scroll to Top Button -->
+    <a href="#page-top" class="scroll-to-top" style="display: flex !important;"><i class="fas fa-angle-up"></i></a>
+
+    <!-- JavaScript for smooth scrolling and navbar color change on scroll -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
+
+
+
+    <script src="js/main.js"></script>
 </body>
 
 </html>
