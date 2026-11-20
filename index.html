@@ -1,1 +1,1050 @@
-placeholder
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dinesh Sikder | Staff Full-Stack, Cloud &amp; Agentic AI Engineer</title>
+  <meta name="description" content="Dinesh Sikder — Staff Engineer &amp; Technical Lead (8+ Years Experience) specializing in Java Spring Boot, Quarkus, Node.js, Python/FastAPI, React, Angular 16+, Agentic AI, MCP Servers &amp; Cloud Observability." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%2310b981'/%3E%3Cstop offset='100%25' stop-color='%23f59e0b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%23060a09'/%3E%3Crect x='2' y='2' width='60' height='60' rx='14' fill='none' stroke='url(%23g)' stroke-width='3'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='monospace' font-weight='bold' font-size='26' fill='url(%23g)'%3EDS%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root {
+      --bg-primary: #060a09;
+      --bg-secondary: #0b1210;
+      --bg-card: rgba(14, 24, 21, 0.78);
+      --border-emerald: rgba(16, 185, 129, 0.22);
+      --border-gold: rgba(245, 158, 11, 0.35);
+      --emerald: #10b981;
+      --emerald-light: #34d399;
+      --gold: #f59e0b;
+      --gold-light: #fbbf24;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-soft: #cbd5e1;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg-primary); color: var(--text-main); }
+    body {
+      background-color: var(--bg-primary);
+      background-image:
+        radial-gradient(circle at 15% 12%, rgba(16, 185, 129, 0.12), transparent 36%),
+        radial-gradient(circle at 85% 18%, rgba(245, 158, 11, 0.09), transparent 38%),
+        linear-gradient(to right, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 44px 44px, 44px 44px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 1.25rem; }
+    .container-narrow { max-width: 1020px; margin: 0 auto; padding: 0 1.25rem; }
+    .section { padding: 5.5rem 0; border-top: 1px solid rgba(16, 185, 129, 0.12); }
+    .section-alt { background: rgba(7, 13, 11, 0.72); }
+
+    .glass {
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-emerald);
+      border-radius: 1rem;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .glass-hover:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-gold);
+      box-shadow: 0 14px 36px -12px rgba(16, 185, 129, 0.24);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #34d399 0%, #fbbf24 55%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 0.4rem;
+    }
+    .section-title { font-size: clamp(1.65rem, 3vw, 2.25rem); font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+    .section-header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-bottom: 2.5rem; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.68rem 1.25rem; border-radius: 0.75rem;
+      font-size: 0.85rem; font-weight: 600; transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #059669, #0d9488);
+      color: #fff; box-shadow: 0 8px 22px -6px rgba(16, 185, 129, 0.45);
+    }
+    .btn-primary:hover { background: linear-gradient(135deg, #10b981, #14b8a6); transform: translateY(-1px); }
+    .btn-gold {
+      background: rgba(245, 158, 11, 0.14);
+      border: 1px solid rgba(245, 158, 11, 0.42);
+      color: var(--gold-light);
+    }
+    .btn-gold:hover { background: rgba(245, 158, 11, 0.24); }
+    .btn-glass {
+      background: rgba(15, 25, 22, 0.85);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: #e2e8f0;
+    }
+    .btn-glass:hover { border-color: var(--gold-light); color: #fff; }
+    .btn-sm { padding: 0.42rem 0.8rem; font-size: 0.75rem; border-radius: 0.55rem; }
+
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+      background: rgba(6, 10, 9, 0.88); backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(16, 185, 129, 0.18);
+    }
+    .nav-inner { max-width: 1240px; margin: 0 auto; padding: 0.85rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { display: flex; align-items: center; gap: 0.65rem; font-weight: 800; font-size: 1.05rem; }
+    .brand-logo {
+      width: 2.15rem; height: 2.15rem; border-radius: 0.55rem;
+      background: linear-gradient(135deg, #059669, #d97706);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #fff;
+    }
+    .nav-links { display: flex; align-items: center; gap: 1.2rem; font-size: 0.8rem; font-weight: 500; color: var(--text-soft); }
+    .nav-links a:hover { color: var(--emerald-light); }
+    @media (max-width: 1024px) { .nav-links { display: none; } }
+
+    .hero { padding: 8.5rem 0 4.5rem; }
+    .hero-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 2.5rem; align-items: center; }
+    @media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; } }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      padding: 0.35rem 0.85rem; border-radius: 999px;
+      background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.32);
+      color: var(--gold-light); font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+    }
+    .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--emerald-light); box-shadow: 0 0 10px var(--emerald); }
+    .hero-title { font-size: clamp(2.1rem, 4.5vw, 3.5rem); font-weight: 900; line-height: 1.12; margin: 1rem 0 0.65rem; }
+    .hero-subtitle { font-size: 1.12rem; font-weight: 600; color: var(--emerald-light); margin-bottom: 1rem; }
+    .hero-desc { color: var(--text-soft); font-size: 0.96rem; max-width: 660px; margin-bottom: 1.25rem; }
+    .pill-group { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.5rem; }
+    .tech-pill {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+      padding: 0.32rem 0.68rem; border-radius: 0.45rem;
+      background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.28); color: #a7f3d0;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .tech-pill.gold { background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #fde68a; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+    /* Profile Card & Avatar Upload */
+    .profile-card { padding: 1.75rem; text-align: center; border-color: rgba(245, 158, 11, 0.3); position: relative; }
+    .avatar-ring {
+      width: 140px; height: 140px; margin: 0 auto 0.85rem; border-radius: 50%; padding: 4px;
+      background: linear-gradient(135deg, #10b981, #f59e0b);
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.28);
+      position: relative; cursor: pointer;
+    }
+    .avatar-inner {
+      width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
+      background: #08100e; display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .avatar-inner img, .avatar-inner svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .avatar-overlay {
+      position: absolute; inset: 0; background: rgba(4, 9, 8, 0.72);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.2s ease; color: #fbbf24; font-size: 0.72rem; font-weight: 600;
+    }
+    .avatar-ring:hover .avatar-overlay { opacity: 1; }
+    .avatar-controls { display: flex; justify-content: center; gap: 0.45rem; margin-bottom: 0.9rem; }
+    .mini-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.65rem; margin: 1.15rem 0; }
+    .mini-stat { background: rgba(4, 8, 7, 0.65); border: 1px solid rgba(16, 185, 129, 0.18); border-radius: 0.7rem; padding: 0.65rem; }
+    .mini-stat strong { display: block; font-size: 1.15rem; font-weight: 800; color: var(--emerald-light); }
+    .mini-stat span { font-size: 0.7rem; color: var(--text-muted); }
+
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.35rem; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 1.5rem; }
+    @media (max-width: 520px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+    .kpi-card { padding: 1.35rem; text-align: center; }
+    .kpi-val { font-size: 2rem; font-weight: 900; color: var(--emerald-light); }
+    .kpi-card:nth-child(even) .kpi-val { color: var(--gold-light); }
+    .kpi-lbl { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+    .about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 2rem; }
+    @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
+    .card-pad { padding: 1.5rem; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.85rem; }
+    .tag-chip {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
+      padding: 0.22rem 0.55rem; border-radius: 0.35rem;
+      background: rgba(4, 8, 7, 0.7); border: 1px solid rgba(16, 185, 129, 0.2); color: #cbd5e1;
+      display: inline-flex; align-items: center; gap: 0.35rem;
+    }
+
+    .skill-row { margin-bottom: 0.85rem; }
+    .skill-meta { display: flex; justify-content: space-between; font-size: 0.78rem; margin-bottom: 0.3rem; color: var(--text-soft); }
+    .progress-track { width: 100%; height: 6px; background: rgba(255, 255, 255, 0.08); border-radius: 999px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #10b981, #f59e0b); border-radius: 999px; }
+
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .filter-btn {
+      padding: 0.45rem 0.9rem; border-radius: 0.55rem; font-size: 0.76rem; font-weight: 600;
+      background: rgba(14, 24, 21, 0.85); border: 1px solid rgba(16, 185, 129, 0.2); color: var(--text-soft);
+    }
+    .filter-btn.active { background: linear-gradient(135deg, #059669, #d97706); border-color: transparent; color: #fff; }
+
+    .exp-card { padding: 1.65rem; border-left: 4px solid var(--emerald); margin-bottom: 1.25rem; }
+    .exp-card:nth-child(even) { border-left-color: var(--gold); }
+    .exp-header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.75rem; }
+    .exp-role { font-size: 1.1rem; font-weight: 700; color: #fff; }
+    .exp-org { font-size: 0.85rem; font-weight: 600; color: var(--emerald-light); }
+    .exp-date { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; padding: 0.25rem 0.65rem; border-radius: 999px; background: rgba(16, 185, 129, 0.12); color: #a7f3d0; height: fit-content; }
+    .exp-list { padding-left: 1.2rem; color: var(--text-soft); font-size: 0.86rem; }
+    .exp-list li { margin-bottom: 0.4rem; }
+
+    .resume-box { padding: 2.25rem; border-color: rgba(16, 185, 129, 0.35); }
+    .resume-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; border-bottom: 1px solid rgba(16, 185, 129, 0.25); padding-bottom: 1.25rem; margin-bottom: 1.5rem; }
+    .resume-h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+
+    /* Avatar URL Modal */
+    .modal-backdrop {
+      display: none; position: fixed; inset: 0; z-index: 90;
+      background: rgba(2, 6, 5, 0.82); backdrop-filter: blur(8px);
+      align-items: center; justify-content: center; padding: 1rem;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-card { width: 100%; max-width: 460px; padding: 1.75rem; border-color: rgba(245, 158, 11, 0.4); }
+    .form-input {
+      width: 100%; padding: 0.62rem 0.82rem; border-radius: 0.55rem;
+      background: rgba(4, 9, 8, 0.9); border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #fff; font-size: 0.84rem; font-family: inherit; margin: 0.45rem 0 1rem;
+    }
+    .form-input:focus { outline: none; border-color: var(--gold-light); }
+
+    .toast {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 100;
+      padding: 0.85rem 1.25rem; border-radius: 0.75rem;
+      background: #064e3b; border: 1px solid var(--gold-light); color: #fff;
+      font-size: 0.84rem; font-weight: 500; box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+      transform: translateY(130%); opacity: 0; transition: all 0.28s ease;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    footer { padding: 2.5rem 1rem; text-align: center; font-size: 0.78rem; color: var(--text-muted); border-top: 1px solid rgba(16, 185, 129, 0.14); }
+
+    @media print {
+      body { background: #fff !important; color: #111 !important; }
+      .navbar, #home, #about, #skills, #technologies, #experience, #projects, #freelance, #github-repos, #contact, footer, .no-print { display: none !important; }
+      #resume { display: block !important; padding: 0 !important; border: none !important; }
+      .resume-box { background: #fff !important; color: #111 !important; border: none !important; padding: 0 !important; }
+      .resume-box * { color: #111 !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar no-print">
+    <div class="nav-inner">
+      <a href="#home" class="brand">
+        <span class="brand-logo">DS</span>
+        <span class="gradient-text">Dinesh Sikder</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#technologies">Technologies</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#freelance">Freelance</a>
+        <a href="#github-repos">GitHub</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <a href="#resume" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-file-arrow-down"></i> <span>Resume</span>
+        </a>
+        <a href="#contact" class="btn btn-gold btn-sm">
+          <span>Hire / Connect</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1. HERO SECTION -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="status-pill">
+            <span class="pulse-dot"></span>
+            <span>STAFF ENGINEER &amp; TECHNICAL LEAD &bull; 8+ YEARS EXPERIENCE</span>
+          </div>
+          <h1 class="hero-title">
+            Hi !! &#128075;&#127995; I'm <span class="gradient-text">Dinesh Sikder</span>
+          </h1>
+          <p class="hero-subtitle">
+            Staff Full-Stack Engineer &bull; Cloud Architect &bull; Agentic AI &amp; MCP Systems Builder
+          </p>
+          <p class="hero-desc">
+            Architecting enterprise <strong>Java (Spring Boot, Quarkus)</strong>, <strong>Node.js / JavaScript (ES6+)</strong>, <strong>Python / FastAPI</strong>, and <strong>React &amp; Angular 16+</strong> systems alongside production <strong>Agentic AI, MCP Servers, Custom AI Agents, and Multi-Subagent Orchestration</strong> with <strong>Splunk &amp; Datadog</strong> observability.
+          </p>
+
+          <div class="pill-group">
+            <span class="tech-pill">Java / Spring Boot / Quarkus</span>
+            <span class="tech-pill gold">Node.js &amp; JavaScript (ES6+)</span>
+            <span class="tech-pill">Python &amp; FastAPI</span>
+            <span class="tech-pill gold">Agentic AI / MCP / Multi-Subagents</span>
+            <span class="tech-pill">React &amp; Angular 16+</span>
+            <span class="tech-pill gold">Splunk &amp; Datadog APM</span>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#resume" class="btn btn-primary"><i class="fa-solid fa-file-arrow-down"></i> View &amp; Download Resume</a>
+            <a href="https://github.com/Dineshsikder?tab=repositories" target="_blank" rel="noopener" class="btn btn-glass"><i class="fa-brands fa-github" style="color:#34d399;"></i> GitHub</a>
+            <a href="https://www.linkedin.com/in/dineshh-sikderr-42886111a/" target="_blank" rel="noopener" class="btn btn-glass"><i class="fa-brands fa-linkedin" style="color:#fbbf24;"></i> LinkedIn</a>
+          </div>
+        </div>
+
+        <!-- Executive Profile & Avatar Card -->
+        <div class="glass profile-card">
+          <div class="avatar-ring" onclick="document.getElementById('avatarFileInput').click()" title="Click to upload your photo">
+            <div id="heroAvatarSlot" class="avatar-inner"></div>
+            <div class="avatar-overlay">
+              <i class="fa-solid fa-camera" style="font-size:1.1rem;margin-bottom:0.2rem;"></i>
+              <span>Add / Change Photo</span>
+            </div>
+          </div>
+          <input id="avatarFileInput" type="file" accept="image/*" style="display:none;" onchange="handleAvatarUpload(event)" />
+
+          <div class="avatar-controls no-print">
+            <button onclick="document.getElementById('avatarFileInput').click()" class="btn btn-gold btn-sm">
+              <i class="fa-solid fa-upload"></i> Upload Avatar
+            </button>
+            <button onclick="openAvatarUrlModal()" class="btn btn-glass btn-sm">
+              <i class="fa-solid fa-link"></i> Image URL
+            </button>
+            <button id="resetAvatarBtn" onclick="resetAvatar()" class="btn btn-glass btn-sm" style="display:none;">
+              Reset
+            </button>
+          </div>
+
+          <h2 style="font-size:1.2rem;font-weight:800;color:#fff;">Dinesh Sikder</h2>
+          <p style="font-size:0.78rem;color:#34d399;font-weight:600;">Staff Engineer &amp; Technical Lead @ Nagarro</p>
+          <p style="font-size:0.74rem;color:#94a3b8;margin-top:0.2rem;">Kolkata, West Bengal, India</p>
+
+          <div class="mini-stats">
+            <div class="mini-stat"><strong>8+ Yrs</strong><span>Enterprise IT</span></div>
+            <div class="mini-stat"><strong style="color:#fbbf24;">97.6%</strong><span>Quarkus Size Cut</span></div>
+            <div class="mini-stat"><strong>16+</strong><span>Squads Led</span></div>
+            <div class="mini-stat"><strong style="color:#fbbf24;">MCP / AI</strong><span>Multi-Subagents</span></div>
+          </div>
+          <p class="font-mono" style="font-size:0.7rem;color:#94a3b8;">
+            BFSI &bull; Telecom &bull; Non-Profit SaaS &bull; Agentic AI
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quantified KPI Strip -->
+  <section class="section section-alt" style="padding:2.5rem 0;">
+    <div class="container">
+      <div class="grid-4">
+        <div class="glass kpi-card">
+          <div class="kpi-val">8+ Yrs</div>
+          <div class="kpi-lbl">Enterprise Full-Stack &amp; Cloud Delivery</div>
+        </div>
+        <div class="glass kpi-card">
+          <div class="kpi-val">97.6%</div>
+          <div class="kpi-lbl">Container Reduction via Quarkus (625MB &rarr; 15MB)</div>
+        </div>
+        <div class="glass kpi-card">
+          <div class="kpi-val">16+</div>
+          <div class="kpi-lbl">Engineers Led Across Agile Squads</div>
+        </div>
+        <div class="glass kpi-card">
+          <div class="kpi-val">99.9%</div>
+          <div class="kpi-lbl">Production SLA with Splunk &amp; Datadog</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ABOUT ME, ACADEMIC DETAILS & HONORS -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <span class="eyebrow">// ABOUT ME</span>
+          <h2 class="section-title" style="margin-bottom:1rem;">Engineering Leadership &amp; Vision</h2>
+          <p style="color:#cbd5e1;font-size:0.93rem;margin-bottom:1rem;">
+            I am Dinesh Sikder, completed <strong>B.Tech in Information Technology</strong> from <strong>Government College of Engineering and Ceramic Technology, Kolkata</strong>. Currently working as <strong>Staff Engineer &amp; Technical Lead at Nagarro</strong> with <strong>8+ years</strong> of experience designing scalable full-stack platforms, cloud-native microservices, and autonomous Agentic AI workflows.
+          </p>
+          <p style="color:#94a3b8;font-size:0.88rem;margin-bottom:1.25rem;">
+            From building high-throughput Java Spring Boot, Quarkus, Node.js, and Python FastAPI services to orchestrating Model Context Protocol (MCP) servers, custom tool-calling agents, and multi-subagent pipelines, I bridge rock-solid enterprise engineering with modern AI innovation.
+          </p>
+
+          <span class="eyebrow" style="margin-top:0.5rem;">// HONORS &amp; AWARDS</span>
+          <div class="tag-row">
+            <span class="tag-chip" style="border-color:rgba(245,158,11,0.35);color:#fde68a;">
+              <i class="fa-solid fa-trophy" style="color:#fbbf24;"></i>
+              <span>Employee of the Year (2020–2021) — Bluespacelabs Pvt. Ltd.</span>
+            </span>
+            <span class="tag-chip" style="border-color:rgba(245,158,11,0.35);color:#fde68a;">
+              <i class="fa-solid fa-medal" style="color:#fbbf24;"></i>
+              <span>3rd Place — Barclays Hackathon Challenge (2019)</span>
+            </span>
+            <span class="tag-chip" style="border-color:rgba(245,158,11,0.35);color:#fde68a;">
+              <i class="fa-solid fa-star" style="color:#fbbf24;"></i>
+              <span>Multiple Cheerboard &amp; Client Excellence Nominations</span>
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <span class="eyebrow">// ACADEMIC DETAILS</span>
+          <div style="display:flex;flex-direction:column;gap:0.85rem;">
+            <div class="glass card-pad" style="padding:1.1rem;">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;">
+                <strong style="font-size:0.88rem;color:#fff;">B.TECH. Information Technology</strong>
+                <span class="font-mono" style="font-size:0.74rem;color:#34d399;">CGPA - 7.96</span>
+              </div>
+              <p style="font-size:0.76rem;color:#94a3b8;margin-top:0.25rem;">Government College of Engineering and Ceramic Technology, Kolkata (2014 – 2018)</p>
+            </div>
+            <div class="glass card-pad" style="padding:1.1rem;">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;">
+                <strong style="font-size:0.88rem;color:#fff;">H.S.E (12th Science)</strong>
+                <span class="font-mono" style="font-size:0.74rem;color:#fbbf24;">Percentage - 68%</span>
+              </div>
+              <p style="font-size:0.76rem;color:#94a3b8;margin-top:0.25rem;">New Barrackpore Colony Boys' High School (WBBHSE)</p>
+            </div>
+            <div class="glass card-pad" style="padding:1.1rem;">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;">
+                <strong style="font-size:0.88rem;color:#fff;">S.E (10th Secondary)</strong>
+                <span class="font-mono" style="font-size:0.74rem;color:#fbbf24;">Percentage - 80%</span>
+              </div>
+              <p style="font-size:0.76rem;color:#94a3b8;margin-top:0.25rem;">Kodalia Agapore High School (WBBSE)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. CORE SKILLS SECTION -->
+  <section id="skills" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">// CORE COMPETENCIES</span>
+          <h2 class="section-title">Technical &amp; Leadership Skills</h2>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="glass card-pad">
+          <h3 style="font-size:0.85rem;font-weight:700;color:#fbbf24;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:1rem;">Languages &amp; Core Engineering</h3>
+          <div class="skill-row"><div class="skill-meta"><span>Java (Core, Java 8/17+, OOPS)</span><span class="font-mono" style="color:#34d399;">95%</span></div><div class="progress-track"><div class="progress-fill" style="width:95%"></div></div></div>
+          <div class="skill-row"><div class="skill-meta"><span>JavaScript (ES6+) &amp; Node.js</span><span class="font-mono" style="color:#34d399;">92%</span></div><div class="progress-track"><div class="progress-fill" style="width:92%"></div></div></div>
+          <div class="skill-row"><div class="skill-meta"><span>TypeScript (Angular 16+ / React.js)</span><span class="font-mono" style="color:#34d399;">90%</span></div><div class="progress-track"><div class="progress-fill" style="width:90%"></div></div></div>
+          <div class="skill-row"><div class="skill-meta"><span>Python &amp; FastAPI</span><span class="font-mono" style="color:#fbbf24;">90%</span></div><div class="progress-track"><div class="progress-fill" style="width:90%"></div></div></div>
+          <div class="skill-row"><div class="skill-meta"><span>REST APIs, Microservices &amp; Git</span><span class="font-mono" style="color:#34d399;">95%</span></div><div class="progress-track"><div class="progress-fill" style="width:95%"></div></div></div>
+        </div>
+
+        <div class="glass card-pad">
+          <h3 style="font-size:0.85rem;font-weight:700;color:#34d399;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:1rem;">Agentic AI, MCP &amp; Cloud</h3>
+          <div class="skill-row"><div class="skill-meta"><span>Agentic AI &amp; Multi-Subagent Systems</span><span class="font-mono" style="color:#fbbf24;">90%</span></div><div class="progress-track"><div class="progress-fill" style="width:90%"></div></div></div>
+          <div class="skill-row"><div class="skill-meta"><span>MCP Servers &amp; Custom AI Agents</span><span class="font-mono" style="color:#fbbf24;">88%</span></div><div class="progress-track"><div class="progress-fill" style="width:88%"></div></div></div>
+          <div class="skill-row"><div class="skill-meta"><span>RAG Pipelines &amp; LLM Orchestration</span><span class="font-mono" style="color:#34d399;">90%</span></div><div class="progress-track"><div class="progress-fill" style="width:90%"></div></div></div>
+          <div class="skill-row"><div class="skill-meta"><span>SQL / NoSQL (PostgreSQL, MySQL, Mongo, Redis)</span><span class="font-mono" style="color:#34d399;">85%</span></div><div class="progress-track"><div class="progress-fill" style="width:85%"></div></div></div>
+          <div class="skill-row"><div class="skill-meta"><span>Data Structures &amp; Algorithms</span><span class="font-mono" style="color:#34d399;">85%</span></div><div class="progress-track"><div class="progress-fill" style="width:85%"></div></div></div>
+        </div>
+
+        <div class="glass card-pad">
+          <h3 style="font-size:0.85rem;font-weight:700;color:#fbbf24;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:1rem;">Leadership &amp; Engineering Mindset</h3>
+          <div class="skill-row"><div class="skill-meta"><span>Communication &amp; Client Handling</span><span class="font-mono" style="color:#34d399;">95%</span></div><div class="progress-track"><div class="progress-fill" style="width:95%"></div></div></div>
+          <div class="skill-row"><div class="skill-meta"><span>Teamwork &amp; Squad Leadership</span><span class="font-mono" style="color:#34d399;">99%</span></div><div class="progress-track"><div class="progress-fill" style="width:99%"></div></div></div>
+          <div class="skill-row"><div class="skill-meta"><span>Accountability &amp; Ownership</span><span class="font-mono" style="color:#34d399;">99%</span></div><div class="progress-track"><div class="progress-fill" style="width:99%"></div></div></div>
+          <div class="skill-row"><div class="skill-meta"><span>Problem-Solving &amp; Debugging</span><span class="font-mono" style="color:#fbbf24;">95%</span></div><div class="progress-track"><div class="progress-fill" style="width:95%"></div></div></div>
+          <div class="skill-row"><div class="skill-meta"><span>Positivity, Patience &amp; Curiosity</span><span class="font-mono" style="color:#34d399;">100%</span></div><div class="progress-track"><div class="progress-fill" style="width:100%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. TECHNOLOGIES & FRAMEWORKS MATRIX -->
+  <section id="technologies" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">// TECHNOLOGIES &amp; FRAMEWORKS</span>
+          <h2 class="section-title">Full-Stack, Cloud &amp; Agentic AI Ecosystem</h2>
+        </div>
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="filterTech('all', this)">All</button>
+          <button class="filter-btn" onclick="filterTech('ai', this)">Agentic AI &amp; MCP</button>
+          <button class="filter-btn" onclick="filterTech('backend', this)">Java / Node / Python</button>
+          <button class="filter-btn" onclick="filterTech('frontend', this)">React / Angular / JS</button>
+          <button class="filter-btn" onclick="filterTech('cloud', this)">Cloud &amp; APM</button>
+        </div>
+      </div>
+
+      <div id="techGrid" class="grid-3">
+        <div class="glass glass-hover card-pad tech-card" data-cat="ai">
+          <span class="font-mono" style="font-size:0.66rem;color:#fbbf24;text-transform:uppercase;">Agentic AI</span>
+          <h3 style="font-size:1.05rem;font-weight:700;color:#fff;margin:0.3rem 0 0.5rem;">Agentic AI &amp; Multi-Subagent Systems</h3>
+          <p style="font-size:0.8rem;color:#cbd5e1;">Designing autonomous multi-agent and supervisor-subagent workflows using LangGraph, CrewAI, and Spring AI with deterministic tool-calling and shared memory state.</p>
+          <div class="tag-row"><span class="tag-chip">LangGraph</span><span class="tag-chip">CrewAI</span><span class="tag-chip">Spring AI</span><span class="tag-chip">Multi-Subagents</span></div>
+        </div>
+
+        <div class="glass glass-hover card-pad tech-card" data-cat="ai">
+          <span class="font-mono" style="font-size:0.66rem;color:#34d399;text-transform:uppercase;">MCP &amp; Agents</span>
+          <h3 style="font-size:1.05rem;font-weight:700;color:#fff;margin:0.3rem 0 0.5rem;">MCP Servers &amp; Custom AI Agents</h3>
+          <p style="font-size:0.8rem;color:#cbd5e1;">Building custom Model Context Protocol (MCP) servers in Python and Node.js/TypeScript to expose enterprise APIs, databases, and internal tools securely to LLMs.</p>
+          <div class="tag-row"><span class="tag-chip">MCP Protocol</span><span class="tag-chip">Custom Agents</span><span class="tag-chip">Tool Calling</span><span class="tag-chip">RAG</span></div>
+        </div>
+
+        <div class="glass glass-hover card-pad tech-card" data-cat="backend">
+          <span class="font-mono" style="font-size:0.66rem;color:#fbbf24;text-transform:uppercase;">Python API</span>
+          <h3 style="font-size:1.05rem;font-weight:700;color:#fff;margin:0.3rem 0 0.5rem;">Python &amp; FastAPI</h3>
+          <p style="font-size:0.8rem;color:#cbd5e1;">Developing high-concurrency asynchronous REST &amp; SSE streaming APIs with Python, FastAPI, Pydantic, and Uvicorn to serve RAG pipelines and AI agent backends.</p>
+          <div class="tag-row"><span class="tag-chip">Python</span><span class="tag-chip">FastAPI</span><span class="tag-chip">Flask</span><span class="tag-chip">AsyncIO</span></div>
+        </div>
+
+        <div class="glass glass-hover card-pad tech-card" data-cat="backend">
+          <span class="font-mono" style="font-size:0.66rem;color:#34d399;text-transform:uppercase;">Enterprise Java</span>
+          <h3 style="font-size:1.05rem;font-weight:700;color:#fff;margin:0.3rem 0 0.5rem;">Java Spring Boot &amp; Quarkus</h3>
+          <p style="font-size:0.8rem;color:#cbd5e1;">Cloud-native Java microservices, Spring Cloud API Gateway with Keycloak OAuth 2.0, and Quarkus migration reducing artifact size by 97.6% (625MB &rarr; 15MB).</p>
+          <div class="tag-row"><span class="tag-chip">Java 8/17+</span><span class="tag-chip">Spring Boot</span><span class="tag-chip">Quarkus</span><span class="tag-chip">Keycloak</span></div>
+        </div>
+
+        <div class="glass glass-hover card-pad tech-card" data-cat="backend">
+          <span class="font-mono" style="font-size:0.66rem;color:#34d399;text-transform:uppercase;">Event &amp; Node</span>
+          <h3 style="font-size:1.05rem;font-weight:700;color:#fff;margin:0.3rem 0 0.5rem;">Node.js &amp; Event-Driven Streaming</h3>
+          <p style="font-size:0.8rem;color:#cbd5e1;">MVC and event-driven APIs with Node.js, Express, Apache Kafka, RabbitMQ, Redis caching, and PostgreSQL / MongoDB persistence.</p>
+          <div class="tag-row"><span class="tag-chip">Node.js</span><span class="tag-chip">Express</span><span class="tag-chip">Apache Kafka</span><span class="tag-chip">Redis</span></div>
+        </div>
+
+        <div class="glass glass-hover card-pad tech-card" data-cat="frontend">
+          <span class="font-mono" style="font-size:0.66rem;color:#fbbf24;text-transform:uppercase;">UI Architecture</span>
+          <h3 style="font-size:1.05rem;font-weight:700;color:#fff;margin:0.3rem 0 0.5rem;">React, Angular 16+ &amp; Micro-Frontends</h3>
+          <p style="font-size:0.8rem;color:#cbd5e1;">Federated frontend architecture using Webpack 5 Module Federation unifying React.js (Hooks/Redux) and Angular 2–16+ (RxJS/NgRx) applications.</p>
+          <div class="tag-row"><span class="tag-chip">JavaScript ES6+</span><span class="tag-chip">React.js</span><span class="tag-chip">Angular 16+</span><span class="tag-chip">Module Federation</span></div>
+        </div>
+
+        <div class="glass glass-hover card-pad tech-card" data-cat="cloud">
+          <span class="font-mono" style="font-size:0.66rem;color:#34d399;text-transform:uppercase;">Observability</span>
+          <h3 style="font-size:1.05rem;font-weight:700;color:#fff;margin:0.3rem 0 0.5rem;">Observability (Splunk, Datadog, Grafana)</h3>
+          <p style="font-size:0.8rem;color:#cbd5e1;">End-to-end production APM, distributed tracing, and centralized log analytics using Splunk, Datadog, Prometheus, Grafana, and ELK Stack.</p>
+          <div class="tag-row"><span class="tag-chip">Splunk</span><span class="tag-chip">Datadog</span><span class="tag-chip">Prometheus</span><span class="tag-chip">Grafana</span></div>
+        </div>
+
+        <div class="glass glass-hover card-pad tech-card" data-cat="cloud">
+          <span class="font-mono" style="font-size:0.66rem;color:#fbbf24;text-transform:uppercase;">Cloud &amp; IaC</span>
+          <h3 style="font-size:1.05rem;font-weight:700;color:#fff;margin:0.3rem 0 0.5rem;">Multi-Cloud, Terraform &amp; CI/CD</h3>
+          <p style="font-size:0.8rem;color:#cbd5e1;">Infrastructure as Code with Terraform alongside automated GitHub Actions, Jenkins, Docker, and Kubernetes pipelines across AWS, Azure, and GCP.</p>
+          <div class="tag-row"><span class="tag-chip">AWS / Azure / GCP</span><span class="tag-chip">Terraform</span><span class="tag-chip">Docker</span><span class="tag-chip">GitHub Actions</span></div>
+        </div>
+
+        <div class="glass glass-hover card-pad tech-card" data-cat="ai">
+          <span class="font-mono" style="font-size:0.66rem;color:#34d399;text-transform:uppercase;">Conversational AI</span>
+          <h3 style="font-size:1.05rem;font-weight:700;color:#fff;margin:0.3rem 0 0.5rem;">AWS Lex, Lambda &amp; Botpress</h3>
+          <p style="font-size:0.8rem;color:#cbd5e1;">Developing omnichannel conversational NLU chatbots with AWS Lex, serverless AWS Lambda, and Botpress integrated with WhatsApp Business APIs.</p>
+          <div class="tag-row"><span class="tag-chip">AWS Lex</span><span class="tag-chip">AWS Lambda</span><span class="tag-chip">Botpress</span><span class="tag-chip">WhatsApp API</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CAREER EXPERIENCE TIMELINE -->
+  <section id="experience" class="section section-alt">
+    <div class="container-narrow">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">// CAREER TRAJECTORY</span>
+          <h2 class="section-title">Professional Experience</h2>
+        </div>
+      </div>
+
+      <div class="glass exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">Associate Staff Engineer &amp; Technical Lead</div>
+            <div class="exp-org">Nagarro Software Private Ltd. &mdash; Kolkata, India</div>
+          </div>
+          <span class="exp-date">Apr 2022 &ndash; Present</span>
+        </div>
+        <ul class="exp-list">
+          <li>Lead a <strong>6-member cross-functional Agile squad</strong> building cloud fundraising, marketing, and advocacy platforms (Luminate Online) for a major US non-profit organization.</li>
+          <li>Architected <strong>Java Spring Boot, Node.js, and Python/FastAPI</strong> microservices alongside <strong>Angular 16+ and TypeScript</strong> UI modernization.</li>
+          <li>Designed internal <strong>Agentic AI workflows, custom MCP tool integrations, and Python automation pipelines</strong> while enforcing production SLA reliability with <strong>Splunk &amp; Datadog</strong> on AWS and Azure.</li>
+        </ul>
+      </div>
+
+      <div class="glass exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">Software Engineer II &amp; Team Lead</div>
+            <div class="exp-org">Bluespacelabs Pvt. Ltd. &mdash; Kolkata, India</div>
+          </div>
+          <span class="exp-date">May 2020 &ndash; Apr 2022</span>
+        </div>
+        <ul class="exp-list">
+          <li>Cut cloud container footprint by <strong>97.6% (625 MB to 15 MB)</strong> via <strong>Quarkus</strong> migration, drastically lowering AWS/GCP compute costs.</li>
+          <li>Built the <strong>Bluwyre conversational AI platform</strong> integrating AWS Lex, Lambda, Botpress, and Node.js with WhatsApp via Apache Kafka and Keycloak OAuth 2.0 API Gateway.</li>
+          <li>Unified 6 independent <strong>React.js and Angular</strong> applications into a single micro-frontend portal for PCCW (Aquila) using Webpack 5 Module Federation.</li>
+        </ul>
+      </div>
+
+      <div class="glass exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">Programmer Analyst</div>
+            <div class="exp-org">Cognizant Technology Solutions &mdash; Kolkata, India</div>
+          </div>
+          <span class="exp-date">Dec 2018 &ndash; May 2020</span>
+        </div>
+        <ul class="exp-list">
+          <li>Developed Java Spring Boot microservices, Apache Kafka message validation preprocessors (Cisco/DHL Bless 3.0), and Angular modules for Credit Suisse and Government of UAE (TRA Digital Vault).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. ENTERPRISE & FEATURED PROJECTS -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">// PORTFOLIO &amp; CASE STUDIES</span>
+          <h2 class="section-title">Enterprise Systems &amp; Featured Projects</h2>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="glass glass-hover card-pad" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <span class="font-mono" style="font-size:0.68rem;color:#fbbf24;background:rgba(245,158,11,0.12);padding:0.2rem 0.55rem;border-radius:0.35rem;">Agentic AI &bull; MCP &bull; FastAPI</span>
+            <h3 style="font-size:1.1rem;font-weight:700;color:#fff;margin:0.65rem 0 0.45rem;">Enterprise Multi-Subagent &amp; MCP Orchestrator</h3>
+            <p style="font-size:0.8rem;color:#cbd5e1;">Modular supervisor-subagent platform built with Python, FastAPI, LangGraph, and custom MCP Servers enabling autonomous SQL querying, document RAG, and API execution.</p>
+            <div class="tag-row"><span class="tag-chip">Python / FastAPI</span><span class="tag-chip">MCP Server</span><span class="tag-chip">Multi-Subagents</span></div>
+          </div>
+          <div style="display:flex;gap:1rem;margin-top:1.1rem;padding-top:0.75rem;border-top:1px solid rgba(16,185,129,0.16);font-size:0.76rem;font-weight:600;">
+            <a href="https://github.com/Dineshsikder?tab=repositories" target="_blank" rel="noopener" style="color:#34d399;"><i class="fa-brands fa-github"></i> View Repository</a>
+          </div>
+        </div>
+
+        <div class="glass glass-hover card-pad" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <span class="font-mono" style="font-size:0.68rem;color:#34d399;background:rgba(16,185,129,0.12);padding:0.2rem 0.55rem;border-radius:0.35rem;">US Non-Profit SaaS &bull; Squad of 16</span>
+            <h3 style="font-size:1.1rem;font-weight:700;color:#fff;margin:0.65rem 0 0.45rem;">Luminate Online Cloud Platform</h3>
+            <p style="font-size:0.8rem;color:#cbd5e1;">Cloud-based fundraising, marketing, and advocacy suite developed with Java Spring Boot, Python, Angular 16+, TypeScript, AWS/Azure, and Splunk/Datadog observability.</p>
+            <div class="tag-row"><span class="tag-chip">Spring Boot</span><span class="tag-chip">Angular 16+</span><span class="tag-chip">Splunk / Datadog</span></div>
+          </div>
+        </div>
+
+        <div class="glass glass-hover card-pad" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <span class="font-mono" style="font-size:0.68rem;color:#34d399;background:rgba(16,185,129,0.12);padding:0.2rem 0.55rem;border-radius:0.35rem;">Conversational AI &bull; Kafka</span>
+            <h3 style="font-size:1.1rem;font-weight:700;color:#fff;margin:0.65rem 0 0.45rem;">Bluwyre WhatsApp AI Chatbot</h3>
+            <p style="font-size:0.8rem;color:#cbd5e1;">Omnichannel conversational AI engine integrating AWS Lex, Lambda, and Botpress with WhatsApp via Apache Kafka and Keycloak OAuth 2.0 API Gateway.</p>
+            <div class="tag-row"><span class="tag-chip">AWS Lex</span><span class="tag-chip">Kafka</span><span class="tag-chip">Node.js / Spring</span></div>
+          </div>
+        </div>
+
+        <div class="glass glass-hover card-pad" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <span class="font-mono" style="font-size:0.68rem;color:#fbbf24;background:rgba(245,158,11,0.12);padding:0.2rem 0.55rem;border-radius:0.35rem;">Open Source AI API</span>
+            <h3 style="font-size:1.1rem;font-weight:700;color:#fff;margin:0.65rem 0 0.45rem;">Recommendation API</h3>
+            <p style="font-size:0.8rem;color:#cbd5e1;">RESTful API built with Python (FastAPI / Flask) to provide personalized recommendations based on user preferences and behavioral data analysis.</p>
+            <div class="tag-row"><span class="tag-chip">Python</span><span class="tag-chip">FastAPI / Flask</span><span class="tag-chip">REST API</span></div>
+          </div>
+          <div style="display:flex;gap:1rem;margin-top:1.1rem;padding-top:0.75rem;border-top:1px solid rgba(16,185,129,0.16);font-size:0.76rem;font-weight:600;">
+            <a href="https://github.com/Dineshsikder?tab=repositories" target="_blank" rel="noopener" style="color:#34d399;"><i class="fa-brands fa-github"></i> View Repository</a>
+            <a href="https://github.com/Dineshsikder?tab=repositories" target="_blank" rel="noopener" style="color:#fbbf24;"><i class="fa-solid fa-play"></i> Live / Demo</a>
+          </div>
+        </div>
+
+        <div class="glass glass-hover card-pad" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <span class="font-mono" style="font-size:0.68rem;color:#34d399;background:rgba(16,185,129,0.12);padding:0.2rem 0.55rem;border-radius:0.35rem;">Cloud &amp; IaC</span>
+            <h3 style="font-size:1.1rem;font-weight:700;color:#fff;margin:0.65rem 0 0.45rem;">AWS Deployment Blueprints</h3>
+            <p style="font-size:0.8rem;color:#cbd5e1;">Automated AWS deployment strategies, Terraform Infrastructure-as-Code templates, and CI/CD best practices for containerized microservices.</p>
+            <div class="tag-row"><span class="tag-chip">AWS</span><span class="tag-chip">Terraform</span><span class="tag-chip">GitHub Actions</span></div>
+          </div>
+          <div style="display:flex;gap:1rem;margin-top:1.1rem;padding-top:0.75rem;border-top:1px solid rgba(16,185,129,0.16);font-size:0.76rem;font-weight:600;">
+            <a href="https://github.com/Dineshsikder?tab=repositories" target="_blank" rel="noopener" style="color:#34d399;"><i class="fa-brands fa-github"></i> View Repository</a>
+          </div>
+        </div>
+
+        <div class="glass glass-hover card-pad" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <span class="font-mono" style="font-size:0.68rem;color:#fbbf24;background:rgba(245,158,11,0.12);padding:0.2rem 0.55rem;border-radius:0.35rem;">Full-Stack Web Apps</span>
+            <h3 style="font-size:1.1rem;font-weight:700;color:#fff;margin:0.65rem 0 0.45rem;">Carbon Footprint &amp; Weather Forecast</h3>
+            <p style="font-size:0.8rem;color:#cbd5e1;">Interactive JavaScript/TypeScript web applications computing real-time carbon emissions and delivering live geospatial weather telemetry via REST APIs.</p>
+            <div class="tag-row"><span class="tag-chip">JavaScript ES6+</span><span class="tag-chip">TypeScript</span><span class="tag-chip">REST API</span></div>
+          </div>
+          <div style="display:flex;gap:1rem;margin-top:1.1rem;padding-top:0.75rem;border-top:1px solid rgba(16,185,129,0.16);font-size:0.76rem;font-weight:600;">
+            <a href="https://github.com/Dineshsikder?tab=repositories" target="_blank" rel="noopener" style="color:#34d399;"><i class="fa-brands fa-github"></i> View Repositories</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. FREELANCE & INDEPENDENT CONSULTING -->
+  <section id="freelance" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">// FREELANCE &amp; AI CONSULTING</span>
+          <h2 class="section-title">Independent Client Solutions &amp; Services</h2>
+        </div>
+        <a href="#contact" class="btn btn-gold btn-sm">Book Discovery Call &rarr;</a>
+      </div>
+
+      <div class="grid-4">
+        <div class="glass glass-hover card-pad">
+          <div style="width:2.3rem;height:2.3rem;border-radius:0.6rem;background:rgba(245,158,11,0.14);border:1px solid rgba(245,158,11,0.3);display:flex;align-items:center;justify-content:center;color:#fbbf24;margin-bottom:0.85rem;">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <h3 style="font-size:0.98rem;font-weight:700;color:#fff;margin-bottom:0.4rem;">Custom MCP &amp; Multi-Agent Systems</h3>
+          <p style="font-size:0.78rem;color:#94a3b8;">End-to-end custom AI agents, MCP servers, and multi-subagent pipelines built with Python, FastAPI, Node.js, and LangGraph.</p>
+        </div>
+
+        <div class="glass glass-hover card-pad">
+          <div style="width:2.3rem;height:2.3rem;border-radius:0.6rem;background:rgba(16,185,129,0.14);border:1px solid rgba(16,185,129,0.3);display:flex;align-items:center;justify-content:center;color:#34d399;margin-bottom:0.85rem;">
+            <i class="fa-solid fa-layer-group"></i>
+          </div>
+          <h3 style="font-size:0.98rem;font-weight:700;color:#fff;margin-bottom:0.4rem;">Full-Stack SaaS MVP Delivery</h3>
+          <p style="font-size:0.78rem;color:#94a3b8;">Production-ready web platforms using React, Angular, Node.js, Python FastAPI, or Java Spring Boot with OAuth 2.0 &amp; Stripe billing.</p>
+        </div>
+
+        <div class="glass glass-hover card-pad">
+          <div style="width:2.3rem;height:2.3rem;border-radius:0.6rem;background:rgba(245,158,11,0.14);border:1px solid rgba(245,158,11,0.3);display:flex;align-items:center;justify-content:center;color:#fbbf24;margin-bottom:0.85rem;">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </div>
+          <h3 style="font-size:0.98rem;font-weight:700;color:#fff;margin-bottom:0.4rem;">Cloud FinOps &amp; Quarkus Optimization</h3>
+          <p style="font-size:0.78rem;color:#94a3b8;">Container size reduction, Terraform IaC automation, and Splunk/Datadog observability setup across AWS, Azure, and GCP.</p>
+        </div>
+
+        <div class="glass glass-hover card-pad">
+          <div style="width:2.3rem;height:2.3rem;border-radius:0.6rem;background:rgba(16,185,129,0.14);border:1px solid rgba(16,185,129,0.3);display:flex;align-items:center;justify-content:center;color:#34d399;margin-bottom:0.85rem;">
+            <i class="fa-solid fa-user-tie"></i>
+          </div>
+          <h3 style="font-size:0.98rem;font-weight:700;color:#fff;margin-bottom:0.4rem;">Fractional Technical Lead</h3>
+          <p style="font-size:0.78rem;color:#94a3b8;">Architecture reviews, micro-frontend migrations, code quality audits, and sprint mentorship for scaling startups.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. GITHUB REPOSITORIES -->
+  <section id="github-repos" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="eyebrow">// OPEN SOURCE</span>
+          <h2 class="section-title">Featured GitHub Repositories</h2>
+        </div>
+        <a href="https://github.com/Dineshsikder?tab=repositories" target="_blank" rel="noopener" class="btn btn-glass btn-sm">
+          All GitHub Repos &rarr;
+        </a>
+      </div>
+
+      <div class="grid-4">
+        <a href="https://github.com/Dineshsikder?tab=repositories" target="_blank" rel="noopener" class="glass glass-hover card-pad" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div style="display:flex;justify-content:space-between;color:#34d399;margin-bottom:0.65rem;"><i class="fa-brands fa-github" style="font-size:1.15rem;"></i><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75rem;"></i></div>
+            <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:0.35rem;">Recommendation API</h3>
+            <p style="font-size:0.76rem;color:#94a3b8;">RESTful API built with Python (FastAPI/Flask) providing personalized recommendations from user preference vectors.</p>
+          </div>
+          <div class="font-mono" style="font-size:0.7rem;color:#fbbf24;margin-top:0.85rem;">&bull; Python / FastAPI</div>
+        </a>
+
+        <a href="https://github.com/Dineshsikder?tab=repositories" target="_blank" rel="noopener" class="glass glass-hover card-pad" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div style="display:flex;justify-content:space-between;color:#fbbf24;margin-bottom:0.65rem;"><i class="fa-brands fa-github" style="font-size:1.15rem;"></i><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75rem;"></i></div>
+            <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:0.35rem;">AWS Deployment</h3>
+            <p style="font-size:0.76rem;color:#94a3b8;">Cloud deployment strategies, Terraform templates, and CI/CD best practices for containerized microservices.</p>
+          </div>
+          <div class="font-mono" style="font-size:0.7rem;color:#34d399;margin-top:0.85rem;">&bull; Terraform / AWS</div>
+        </a>
+
+        <a href="https://github.com/Dineshsikder?tab=repositories" target="_blank" rel="noopener" class="glass glass-hover card-pad" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div style="display:flex;justify-content:space-between;color:#34d399;margin-bottom:0.65rem;"><i class="fa-brands fa-github" style="font-size:1.15rem;"></i><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75rem;"></i></div>
+            <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:0.35rem;">Carbon Footprint Calculator</h3>
+            <p style="font-size:0.76rem;color:#94a3b8;">Interactive web application computing and tracking environmental carbon footprint across daily activities.</p>
+          </div>
+          <div class="font-mono" style="font-size:0.7rem;color:#fbbf24;margin-top:0.85rem;">&bull; TypeScript / JS</div>
+        </a>
+
+        <a href="https://github.com/Dineshsikder?tab=repositories" target="_blank" rel="noopener" class="glass glass-hover card-pad" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div style="display:flex;justify-content:space-between;color:#fbbf24;margin-bottom:0.65rem;"><i class="fa-brands fa-github" style="font-size:1.15rem;"></i><i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75rem;"></i></div>
+            <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:0.35rem;">Weather Forecast</h3>
+            <p style="font-size:0.76rem;color:#94a3b8;">Real-time weather forecasting web app integrating external geospatial telemetry APIs.</p>
+          </div>
+          <div class="font-mono" style="font-size:0.7rem;color:#34d399;margin-top:0.85rem;">&bull; JavaScript / REST</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. EXECUTIVE RESUME & DOWNLOAD -->
+  <section id="resume" class="section section-alt">
+    <div class="container-narrow">
+      <div class="section-header no-print">
+        <div>
+          <span class="eyebrow">// CURRICULUM VITAE</span>
+          <h2 class="section-title">Executive Resume (2026 Edition)</h2>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+          <button onclick="downloadResumeFile()" class="btn btn-primary btn-sm">
+            <i class="fa-solid fa-download"></i> Download ATS Resume (.HTML)
+          </button>
+          <button onclick="window.print()" class="btn btn-glass btn-sm">
+            <i class="fa-solid fa-file-pdf"></i> Print / Save PDF
+          </button>
+        </div>
+      </div>
+
+      <div id="resumeDocument" class="glass resume-box">
+        <div class="resume-top">
+          <div>
+            <h3 style="font-size:1.55rem;font-weight:900;color:#fff;">DINESH SIKDER</h3>
+            <p style="font-size:0.9rem;font-weight:600;color:#34d399;">Staff Full-Stack Engineer &amp; Technical Lead (Java, Node.js, Python/FastAPI, Cloud &amp; Agentic AI)</p>
+          </div>
+          <div class="font-mono" style="font-size:0.75rem;color:#cbd5e1;line-height:1.6;">
+            <div>Kolkata, West Bengal, India</div>
+            <div>(+91) 9903561546 &bull; sikder.dinesh2@gmail.com</div>
+            <div>linkedin.com/in/dineshh-sikderr-42886111a &bull; github.com/Dineshsikder</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:1.4rem;">
+          <h4 class="resume-h4">Executive Summary</h4>
+          <p style="font-size:0.86rem;color:#cbd5e1;">
+            Results-driven Staff Full-Stack Engineer and Technical Lead with <strong>8+ years</strong> of experience across BFSI, Telecom, E-Commerce, and Enterprise SaaS. Proven track record architecting distributed <strong>Java (Spring Boot, Quarkus)</strong>, <strong>Node.js / JavaScript (ES6+)</strong>, and <strong>Python / FastAPI</strong> microservices alongside federated <strong>React.js &amp; Angular 16+</strong> frontends. Specialized in production <strong>Generative AI, RAG pipelines, Model Context Protocol (MCP) Servers, Custom AI Agents, and Multi-Subagent Orchestration</strong>, backed by full-stack observability using <strong>Splunk, Datadog, Prometheus, and Grafana</strong>.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div style="background:rgba(4,9,8,0.65);border:1px solid rgba(16,185,129,0.2);border-radius:0.75rem;padding:1.1rem;">
+            <h4 class="resume-h4">Core Technical Stack</h4>
+            <p style="font-size:0.78rem;color:#cbd5e1;">
+              <strong>AI &amp; Agents:</strong> Agentic AI, MCP Servers, Custom AI Agents, Multi-Subagent Systems (LangGraph, CrewAI, Spring AI), RAG, AWS Lex, Botpress.<br>
+              <strong>Backend:</strong> Java 8/17+, Spring Boot, Quarkus, Node.js, Express, Python, FastAPI, Flask, Kafka, RabbitMQ.<br>
+              <strong>Frontend:</strong> JavaScript (ES6+), TypeScript, React.js, Angular 2–16+, Module Federation.<br>
+              <strong>Cloud &amp; APM:</strong> AWS, Azure, GCP, Terraform, Docker, Kubernetes, Splunk, Datadog, Prometheus, Grafana.
+            </p>
+          </div>
+          <div style="background:rgba(4,9,8,0.65);border:1px solid rgba(16,185,129,0.2);border-radius:0.75rem;padding:1.1rem;">
+            <h4 class="resume-h4">Education &amp; Honors</h4>
+            <p style="font-size:0.78rem;color:#cbd5e1;">
+              <strong>B.Tech in Information Technology (2014–2018):</strong> Government College of Engineering &amp; Ceramic Technology, Kolkata (CGPA: 7.96).<br>
+              <strong>Awards:</strong> Employee of the Year (2020–2021) at Bluespacelabs; 3rd Place at Barclays Hackathon Challenge (2019); Multiple Cheerboard Nominations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. CONTACT SECTION -->
+  <section id="contact" class="section">
+    <div class="container-narrow">
+      <div class="glass" style="padding:2.75rem 1.75rem;text-align:center;border-color:rgba(245,158,11,0.3);">
+        <span class="eyebrow">// CONTACT ME</span>
+        <h2 class="section-title" style="margin-bottom:0.65rem;">Let's Connect for Leadership, Full-Stack &amp; AI Roles</h2>
+        <p style="color:#cbd5e1;font-size:0.9rem;max-width:580px;margin:0 auto 1.5rem;">
+          Kolkata, India &bull; Open to Global Opportunities, Technical Leadership &amp; Freelance AI Consulting
+        </p>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;">
+          <a href="mailto:sikder.dinesh2@gmail.com" class="btn btn-primary"><i class="fa-solid fa-envelope"></i> <span>sikder.dinesh2@gmail.com</span></a>
+          <a href="tel:+919903561546" class="btn btn-glass"><i class="fa-solid fa-phone" style="color:#fbbf24;"></i> <span>+91 9903561546</span></a>
+          <a href="https://www.linkedin.com/in/dineshh-sikderr-42886111a/" target="_blank" rel="noopener" class="btn btn-glass"><i class="fa-brands fa-linkedin" style="color:#34d399;"></i> <span>LinkedIn</span></a>
+          <a href="https://github.com/Dineshsikder" target="_blank" rel="noopener" class="btn btn-glass"><i class="fa-brands fa-github" style="color:#fbbf24;"></i> <span>GitHub</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Dinesh Sikder. Engineered for performance, clarity &amp; scale.</p>
+  </footer>
+
+  <!-- Avatar Image URL Modal -->
+  <div id="avatarUrlModal" class="modal-backdrop no-print">
+    <div class="glass modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+        <h3 style="font-size:1.05rem;font-weight:800;color:#fff;"><i class="fa-solid fa-image" style="color:#fbbf24;"></i> Set Avatar Image URL</h3>
+        <button onclick="closeAvatarUrlModal()" style="color:#94a3b8;font-size:1.1rem;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <p style="font-size:0.78rem;color:#cbd5e1;">
+        Paste a direct image link (e.g., <code>./assets/avatar.jpg</code> or your GitHub/LinkedIn photo URL):
+      </p>
+      <input id="avatarUrlInput" type="url" class="form-input font-mono" placeholder="https://avatars.githubusercontent.com/u/..." />
+      <div style="display:flex;justify-content:flex-end;gap:0.5rem;">
+        <button onclick="closeAvatarUrlModal()" class="btn btn-glass btn-sm">Cancel</button>
+        <button onclick="saveAvatarUrl()" class="btn btn-primary btn-sm">Apply Avatar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    const DEFAULT_AVATAR_SVG = `
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#064e3b"/>
+            <stop offset="100%" stop-color="#091512"/>
+          </linearGradient>
+          <linearGradient id="goldRim" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#34d399"/>
+            <stop offset="100%" stop-color="#f59e0b"/>
+          </linearGradient>
+        </defs>
+        <rect width="200" height="200" fill="url(#bgGrad)"/>
+        <circle cx="100" cy="76" r="34" fill="#d9a077"/>
+        <path d="M66 68 C66 40, 134 40, 134 68 C130 52, 70 52, 66 68 Z" fill="#111827"/>
+        <path d="M42 188 C46 138, 154 138, 158 188 Z" fill="#0f172a" stroke="url(#goldRim)" stroke-width="2.5"/>
+        <polygon points="100,136 86,158 100,186 114,158" fill="#10b981"/>
+        <rect x="78" y="68" width="18" height="11" rx="3" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+        <rect x="104" y="68" width="18" height="11" rx="3" fill="none" stroke="#fbbf24" stroke-width="2.2"/>
+        <line x1="96" y1="73" x2="104" y2="73" stroke="#fbbf24" stroke-width="2.2"/>
+      </svg>`;
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3200);
+    }
+
+    function renderAvatar() {
+      const saved = localStorage.getItem('ds_portfolio_avatar');
+      const slot = document.getElementById('heroAvatarSlot');
+      const resetBtn = document.getElementById('resetAvatarBtn');
+      if (saved) {
+        slot.innerHTML = `<img src="${saved}" alt="Dinesh Sikder" />`;
+        resetBtn.style.display = 'inline-flex';
+      } else {
+        slot.innerHTML = DEFAULT_AVATAR_SVG;
+        resetBtn.style.display = 'none';
+      }
+    }
+
+    function handleAvatarUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        localStorage.setItem('ds_portfolio_avatar', reader.result);
+        renderAvatar();
+        showToast('Avatar photo updated!');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function openAvatarUrlModal() {
+      document.getElementById('avatarUrlInput').value = localStorage.getItem('ds_portfolio_avatar') || '';
+      document.getElementById('avatarUrlModal').classList.add('open');
+    }
+
+    function closeAvatarUrlModal() {
+      document.getElementById('avatarUrlModal').classList.remove('open');
+    }
+
+    function saveAvatarUrl() {
+      const url = document.getElementById('avatarUrlInput').value.trim();
+      if (!url) return;
+      localStorage.setItem('ds_portfolio_avatar', url);
+      renderAvatar();
+      closeAvatarUrlModal();
+      showToast('Avatar URL applied!');
+    }
+
+    function resetAvatar() {
+      localStorage.removeItem('ds_portfolio_avatar');
+      renderAvatar();
+      showToast('Avatar reset to default.');
+    }
+
+    function filterTech(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.tech-card').forEach(card => {
+        card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'block' : 'none';
+      });
+    }
+
+    function downloadResumeFile() {
+      const doc = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Dinesh Sikder - Staff Engineer & Technical Lead Resume (2026)</title>
+      <style>body{font-family:'Segoe UI',Arial,sans-serif;color:#111827;max-width:850px;margin:28px auto;padding:0 24px;line-height:1.48;font-size:13.5px}h1{margin:0;font-size:24px;color:#064e3b}.sub{font-weight:600;color:#b45309;margin:4px 0 8px}.contact{font-size:12.5px;color:#374151;border-bottom:2px solid #065f46;padding-bottom:10px;margin-bottom:14px}h2{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:#065f46;border-bottom:1px solid #d1d5db;padding-bottom:3px;margin-top:16px}.role{display:flex;justify-content:space-between;font-weight:700;margin-top:8px}ul{margin:4px 0 10px 18px;padding:0}li{margin-bottom:4px}</style>
+      </head><body>
+      <h1>DINESH SIKDER</h1>
+      <div class="sub">Staff Full-Stack Engineer &amp; Technical Lead | Java, Node.js, Python/FastAPI, Cloud &amp; Agentic AI</div>
+      <div class="contact">Kolkata, West Bengal, India | Phone: +91 9903561546 | Email: sikder.dinesh2@gmail.com<br>LinkedIn: https://www.linkedin.com/in/dineshh-sikderr-42886111a/ | GitHub: https://github.com/Dineshsikder | Portfolio: https://dineshsikder.github.io/</div>
+      <h2>Professional Summary</h2>
+      <p>Staff Full-Stack Engineer and Technical Lead with <strong>8+ years</strong> of experience across BFSI, Telecom, E-Commerce, and Enterprise SaaS. Proven expertise architecting scalable <strong>Java (Spring Boot, Quarkus)</strong>, <strong>Node.js / JavaScript (ES6+)</strong>, and <strong>Python / FastAPI</strong> microservices alongside federated <strong>React.js &amp; Angular 16+</strong> micro-frontends. Specialized in production <strong>Agentic AI, Model Context Protocol (MCP) Servers, Custom AI Agents, Multi-Subagent Orchestration, and RAG pipelines</strong>, supported by full-stack observability with <strong>Splunk, Datadog, Prometheus, and Grafana</strong>.</p>
+      <h2>Core Technical Competencies</h2>
+      <ul>
+        <li><strong>Agentic AI &amp; GenAI:</strong> Model Context Protocol (MCP) Servers, Custom AI Agents, Multi-Subagent Systems (LangGraph, CrewAI, Spring AI), RAG Pipelines, Vector Embeddings, Tool-Calling, Prompt Engineering, AWS Lex &amp; Lambda, Botpress.</li>
+        <li><strong>Backend &amp; APIs:</strong> Core Java, Java 8/17+, Spring Boot, Spring Cloud (Gateway, Config Server, Sleuth), Quarkus, Node.js, Express.js, Python, FastAPI, Flask, Django REST Framework, Apache Kafka, RabbitMQ, REST, GraphQL.</li>
+        <li><strong>Frontend &amp; Micro-Frontends:</strong> JavaScript (ES6+, Async/Await), TypeScript, React.js (Hooks, Redux Toolkit, Context API, Next.js), Angular (2+ to 16+, RxJS, NgRx, Signals), Webpack 5 Module Federation, HTML5, CSS3, SASS, Tailwind CSS, Material UI, Jest/Jasmine.</li>
+        <li><strong>Cloud, DevOps &amp; Security:</strong> AWS, Azure, GCP, Terraform (IaC), Docker, Kubernetes, GitHub Actions, Jenkins CI/CD, Keycloak OAuth 2.0, JWT Introspection, RBAC, IP Whitelisting &amp; Rate Limiting.</li>
+        <li><strong>Observability &amp; Databases:</strong> Splunk, Datadog APM, Prometheus, Grafana, ELK Stack, PostgreSQL, MySQL, Oracle, MongoDB, Redis Caching, Elasticsearch, Flyway.</li>
+      </ul>
+      <h2>Professional Experience</h2>
+      <div class="role"><span>Associate Staff Engineer &amp; Technical Lead — Nagarro Software Pvt. Ltd. (Kolkata, India)</span><span>Apr 2022 – Present</span></div>
+      <ul>
+        <li>Lead a 6-member cross-functional Agile squad delivering cloud-native fundraising, marketing, and advocacy platforms (Luminate Online) for a major US non-profit organization.</li>
+        <li>Architected high-throughput Java Spring Boot, Node.js, and Python/FastAPI microservices alongside Angular 16+ and TypeScript UI modernization.</li>
+        <li>Designed internal Agentic AI workflows, custom MCP tool integrations, and Python automation pipelines while enforcing production SLA reliability using Splunk and Datadog across AWS and Azure.</li>
+      </ul>
+      <div class="role"><span>Software Engineer II &amp; Team Lead — Bluespacelabs Pvt. Ltd. (Kolkata, India)</span><span>May 2020 – Apr 2022</span></div>
+      <ul>
+        <li>Reduced cloud container footprint by 97.6% (from 625 MB to 15 MB) by migrating core Java services to Quarkus, significantly lowering AWS/GCP infrastructure costs.</li>
+        <li>Built the Bluwyre conversational AI platform integrating AWS Lex, Lambda, Botpress, and Node.js with WhatsApp via Apache Kafka and Keycloak OAuth 2.0 API Gateway.</li>
+        <li>Unified 6 independent React.js and Angular applications into a single micro-frontend portal for PCCW (Aquila) using Webpack 5 Module Federation.</li>
+      </ul>
+      <div class="role"><span>Programmer Analyst — Cognizant Technology Solutions (Kolkata, India)</span><span>Dec 2018 – May 2020</span></div>
+      <ul>
+        <li>Developed Java Spring Boot microservices, Apache Kafka validation preprocessors (Cisco/DHL Bless 3.0), and Angular modules for Credit Suisse and Government of UAE (TRA Digital Vault).</li>
+      </ul>
+      <h2>Education &amp; Honors</h2>
+      <ul>
+        <li><strong>B.Tech in Information Technology (2014 – 2018):</strong> Government College of Engineering &amp; Ceramic Technology, Kolkata (CGPA: 7.96).</li>
+        <li><strong>Awards:</strong> Employee of the Year (2020–2021) at Bluespacelabs Pvt. Ltd.; 3rd Place at Barclays Hackathon Challenge (2019); Multiple Cheerboard Nominations.</li>
+      </ul>
+      </body></html>`;
+
+      const blob = new Blob([doc], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Dinesh_Sikder_Resume_2026.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    window.addEventListener('DOMContentLoaded', renderAvatar);
+  </script>
+</body>
+</html>
