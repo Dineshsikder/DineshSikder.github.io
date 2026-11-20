@@ -119,6 +119,9 @@
                 </div>
             </div>
             <div class="flex flex-wrap items-center gap-2">
+                <button onclick="resetPortfolioToDefaults()" title="Reset to Default Template" class="px-3 py-2 rounded-xl glass hover:border-rose-400/50 text-rose-300 text-xs font-semibold transition cursor-pointer">
+                    <i class="fa-solid fa-rotate-left"></i>
+                </button>
                 <button onclick="publishChangesToGitHub()" id="publish-btn" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-amber-500 hover:from-emerald-400 hover:to-amber-400 text-slate-950 font-extrabold text-xs transition shadow-lg flex items-center space-x-1.5 cursor-pointer">
                     <i class="fa-solid fa-cloud-arrow-up"></i>
                     <span>Publish Live to GitHub</span>
@@ -133,11 +136,27 @@
     <!-- Custom Notification Toast -->
     <div id="cms-toast" class="fixed top-20 right-5 z-50 hidden max-w-sm glass-gold rounded-xl px-4 py-3 text-xs font-medium text-white shadow-2xl border border-emerald-400/50 transition-all"></div>
 
-    <!-- GitHub 1-Click OAuth Sign-In Modal -->
+    <!-- Automatic GitHub Repo Referrer Owner Banner -->
+    <div id="owner-referrer-banner" class="hidden fixed top-20 inset-x-4 sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 z-40 glass-gold rounded-2xl px-5 py-3 shadow-2xl border border-amber-400/50 max-w-xl">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center space-x-2.5 text-xs">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span class="text-slate-200">Opened from <strong class="text-amber-300 font-mono">github.com/Dineshsikder</strong> — Owner detected!</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="openGitHubLoginModal()" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-amber-500 text-slate-950 font-extrabold text-xs cursor-pointer">
+                    Unlock Edit Mode
+                </button>
+                <button onclick="document.getElementById('owner-referrer-banner').classList.add('hidden')" aria-label="Dismiss" class="text-slate-400 hover:text-white px-1.5 cursor-pointer">&times;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GitHub Device Flow Sign-In Modal (Zero Backend Required) -->
     <div id="gh-login-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="glass-gold rounded-3xl max-w-md w-full p-7 space-y-5 relative border border-amber-500/40 shadow-2xl">
             <div class="absolute top-5 right-5 flex items-center space-x-2">
-                <button onclick="toggleOAuthConfigPanel()" title="Configure GitHub OAuth App & Worker" aria-label="OAuth Settings" class="w-8 h-8 rounded-lg glass flex items-center justify-center text-amber-300 hover:text-white cursor-pointer">
+                <button onclick="toggleDeviceConfigPanel()" title="Configure GitHub OAuth Client ID" aria-label="OAuth Settings" class="w-8 h-8 rounded-lg glass flex items-center justify-center text-amber-300 hover:text-white cursor-pointer">
                     <i class="fa-solid fa-gear"></i>
                 </button>
                 <button onclick="closeGitHubLoginModal()" aria-label="Close Modal" class="w-8 h-8 rounded-lg glass flex items-center justify-center text-slate-400 hover:text-white cursor-pointer">
@@ -149,46 +168,59 @@
                     <i class="fa-brands fa-github"></i>
                 </div>
                 <div>
-                    <h3 class="text-lg font-bold text-white">Sign in with GitHub</h3>
-                    <p class="text-xs text-slate-400">1-Click OAuth verification for <strong class="text-amber-300">@Dineshsikder</strong></p>
+                    <h3 class="text-lg font-bold text-white">GitHub Owner Verification</h3>
+                    <p class="text-xs text-slate-400">Zero-backend Device Flow for <strong class="text-amber-300">@Dineshsikder</strong></p>
                 </div>
             </div>
 
             <p class="text-xs text-slate-300 leading-relaxed">
-                Authenticate directly with your GitHub account—no manual Personal Access Token required. Once verified as <code class="text-emerald-300">@Dineshsikder</code>, inline editing and live publishing to <code class="text-amber-300">Dineshsikder.github.io</code> unlock automatically.
+                Verify your active GitHub session without creating a Personal Access Token or deploying a server. Generate an 8-character device code, authorize on <code class="text-emerald-300">github.com/login/device</code>, and unlock live inline editing.
             </p>
 
-            <!-- Collapsible One-Time OAuth App & Worker Setup -->
-            <div id="oauth-config-panel" class="hidden space-y-3 text-xs p-4 rounded-2xl bg-black/55 border border-emerald-900/60">
-                <div class="flex items-center justify-between">
-                    <span class="font-mono text-[11px] font-bold text-amber-300 uppercase">One-Time OAuth App Setup</span>
-                    <button onclick="copyWorkerTemplate()" class="text-[11px] font-mono text-emerald-400 hover:text-emerald-300 underline cursor-pointer">Copy Cloudflare Worker Code</button>
-                </div>
+            <!-- Collapsible One-Time Client ID & Relay Setup -->
+            <div id="device-config-panel" class="hidden space-y-3 text-xs p-4 rounded-2xl bg-black/55 border border-emerald-900/60">
+                <div class="font-mono text-[11px] font-bold text-amber-300 uppercase">One-Time GitHub OAuth App Setup</div>
                 <div>
-                    <label class="block font-mono text-slate-300 mb-1">GitHub OAuth App Client ID</label>
+                    <label class="block font-mono text-slate-300 mb-1">GitHub OAuth App Client ID (Device Flow Enabled)</label>
                     <input id="gh-client-id-input" type="text" placeholder="Ov23liXXXXXXXXXXXXXX" class="w-full px-3 py-2 rounded-xl bg-black/70 border border-slate-700 text-white font-mono focus:outline-none focus:border-emerald-400">
                 </div>
                 <div>
-                    <label class="block font-mono text-slate-300 mb-1">OAuth Token Exchange Worker URL</label>
-                    <input id="gh-worker-url-input" type="url" placeholder="https://github-oauth.dineshsikder.workers.dev" class="w-full px-3 py-2 rounded-xl bg-black/70 border border-slate-700 text-white font-mono focus:outline-none focus:border-emerald-400">
+                    <label class="block font-mono text-slate-300 mb-1">CORS Relay Prefix (Optional for GitHub Device Endpoints)</label>
+                    <input id="gh-cors-relay-input" type="text" placeholder="https://corsproxy.io/?" class="w-full px-3 py-2 rounded-xl bg-black/70 border border-slate-700 text-white font-mono focus:outline-none focus:border-emerald-400">
                 </div>
                 <div>
                     <label class="block font-mono text-slate-300 mb-1">Target Repository</label>
                     <input id="gh-repo-input" type="text" value="Dineshsikder/Dineshsikder.github.io" class="w-full px-3 py-2 rounded-xl bg-black/70 border border-slate-700 text-white font-mono focus:outline-none focus:border-emerald-400">
                 </div>
-                <button onclick="saveOAuthSettings()" class="w-full py-2 rounded-xl bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 font-bold hover:bg-emerald-500/30 transition cursor-pointer">
-                    Save OAuth Settings
+                <button onclick="saveDeviceFlowSettings()" class="w-full py-2 rounded-xl bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 font-bold hover:bg-emerald-500/30 transition cursor-pointer">
+                    Save Settings
                 </button>
             </div>
 
+            <!-- Live 8-Character Device Code Display -->
+            <div id="device-code-box" class="hidden p-4 rounded-2xl bg-black/70 border border-emerald-500/40 text-center space-y-3">
+                <div class="text-[11px] font-mono text-slate-400 uppercase">Enter this code on GitHub</div>
+                <div class="flex items-center justify-center space-x-2">
+                    <span id="device-user-code" class="font-mono text-2xl font-black tracking-widest text-amber-300 bg-slate-900 px-4 py-2 rounded-xl border border-amber-500/30">XXXX-XXXX</span>
+                    <button onclick="copyDeviceUserCode()" title="Copy Code" class="px-3 py-2.5 rounded-xl glass text-emerald-300 hover:text-white text-xs font-mono cursor-pointer">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+                <a id="device-verification-link" href="https://github.com/login/device" target="_blank" rel="noopener" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 hover:text-white text-xs font-bold transition">
+                    <span>Open github.com/login/device</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+                <p id="device-poll-status" class="text-[11px] font-mono text-slate-400 animate-pulse">Waiting for GitHub authorization...</p>
+            </div>
+
             <div class="space-y-2.5 pt-1">
-                <button onclick="startGitHubOAuthFlow()" id="gh-oauth-btn" class="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-emerald-500 to-amber-500 hover:from-emerald-400 hover:to-amber-400 text-slate-950 font-extrabold text-sm transition shadow-lg shadow-emerald-600/20 cursor-pointer flex items-center justify-center space-x-2.5">
+                <button onclick="startGitHubDeviceFlow()" id="gh-device-btn" class="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-emerald-500 to-amber-500 hover:from-emerald-400 hover:to-amber-400 text-slate-950 font-extrabold text-sm transition shadow-lg shadow-emerald-600/20 cursor-pointer flex items-center justify-center space-x-2.5">
                     <i class="fa-brands fa-github text-lg"></i>
-                    <span>Continue with GitHub</span>
+                    <span>Generate GitHub Verification Code</span>
                 </button>
                 <div class="flex items-center justify-between text-[11px] text-slate-400 px-1">
-                    <span>Scope: <code class="text-slate-300">repo</code> (contents write)</span>
-                    <button onclick="toggleOAuthConfigPanel()" class="text-amber-300 hover:underline cursor-pointer">Configure Client ID / Worker</button>
+                    <span>Verifies <code class="text-slate-300">@Dineshsikder</code> &bull; <code class="text-slate-300">repo</code> scope</span>
+                    <button onclick="toggleDeviceConfigPanel()" class="text-amber-300 hover:underline cursor-pointer">Configure Client ID</button>
                 </div>
             </div>
         </div>
@@ -369,23 +401,99 @@
 
     <!-- Quantified Metrics Strip -->
     <section class="py-10 px-5 sm:px-8 border-y border-emerald-950/80 bg-surface/90">
-        <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-5 text-center">
-            <div class="p-5 rounded-2xl glass">
-                <div class="text-3xl sm:text-4xl font-black text-white" data-editable="metrics.m1Val">8+ Yrs</div>
-                <p class="text-xs sm:text-sm text-slate-400 mt-1" data-editable="metrics.m1Label">Full-Stack, Cloud &amp; AI Experience</p>
+        <div class="max-w-7xl mx-auto space-y-4">
+            <div class="flex justify-end">
+                <button onclick="openAddKpiModal()" class="admin-only items-center space-x-1.5 px-3.5 py-1.5 rounded-xl bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs font-semibold cursor-pointer">
+                    <i class="fa-solid fa-plus"></i><span>Add KPI Stat Card</span>
+                </button>
             </div>
-            <div class="p-5 rounded-2xl glass">
-                <div class="text-3xl sm:text-4xl font-black text-amber-400" data-editable="metrics.m2Val">97.6%</div>
-                <p class="text-xs sm:text-sm text-slate-400 mt-1" data-editable="metrics.m2Label">Cloud Footprint Saved via Quarkus</p>
+            <div id="kpi-metrics-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-5 text-center"></div>
+        </div>
+    </section>
+
+    <!-- 2. ABOUT ME, EXPERIENCE & ACADEMIC MILESTONES -->
+    <section id="about" class="py-24 px-5 sm:px-8">
+        <div class="max-w-7xl mx-auto space-y-12">
+            <div class="space-y-2">
+                <span class="font-mono text-xs text-emerald-400 uppercase tracking-widest" data-editable="about.eyebrow">// ABOUT ME &amp; BACKGROUND</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white" data-editable="about.heading">Engineering Philosophy, Career &amp; Education</h2>
             </div>
-            <div class="p-5 rounded-2xl glass">
-                <div class="text-3xl sm:text-4xl font-black text-emerald-400" data-editable="metrics.m3Val">16+</div>
-                <p class="text-xs sm:text-sm text-slate-400 mt-1" data-editable="metrics.m3Label">Engineers Led in Agile Delivery</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Bio & Career Timeline -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="glass rounded-2xl p-7 sm:p-8 space-y-5">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 h-16 rounded-2xl p-0.5 bg-gradient-to-br from-emerald-400 to-amber-400 shrink-0 overflow-hidden">
+                                <div id="about-avatar-slot" class="w-full h-full rounded-[14px] bg-obsidian overflow-hidden flex items-center justify-center"></div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white" data-editable="about.profileTitle">Executive Profile</h3>
+                                <p class="text-xs text-emerald-400 font-mono" data-editable="about.subtitle">Staff Full-Stack, Cloud &amp; Agentic AI Engineer</p>
+                            </div>
+                        </div>
+                        <p data-editable="about.p1" class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                            I am a passionate Staff Engineer &amp; Technical Lead based in Kolkata, India, with 8+ years of hands-on experience designing, developing, and scaling mission-critical software systems. My expertise bridges enterprise JVM microservices (Java, Spring Boot, Quarkus), modern async runtimes (Node.js, Python, FastAPI), federated frontends (JavaScript ES6+, React, Angular 16+), and autonomous Agentic AI &amp; MCP Server architectures.
+                        </p>
+                        <p data-editable="about.p2" class="text-sm text-slate-400 leading-relaxed">
+                            Beyond leading 16-member engineering squads at Nagarro, I actively partner with global startups and founders as an independent technical consultant—building custom multi-subagent AI assistants, RAG knowledge engines, and high-efficiency cloud infrastructures.
+                        </p>
+                    </div>
+
+                    <!-- Career Experience Timeline -->
+                    <div id="experience-list" class="space-y-4"></div>
+                    <button onclick="openAddExperienceModal()" class="admin-only items-center space-x-2 px-4 py-2 rounded-xl bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-xs font-semibold cursor-pointer">
+                        <i class="fa-solid fa-plus"></i><span>Add Experience Role</span>
+                    </button>
+                </div>
+
+                <!-- Education & Honors Column -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="glass-gold rounded-2xl p-7 space-y-5">
+                        <div class="flex items-center justify-between gap-2">
+                            <h3 class="text-xl font-bold text-white flex items-center space-x-2.5">
+                                <i class="fa-solid fa-graduation-cap text-emerald-400"></i>
+                                <span data-editable="edu.sectionTitle">Education &amp; Academic Record</span>
+                            </h3>
+                            <button onclick="openAddAcademicModal()" class="admin-only items-center space-x-1 px-3 py-1.5 rounded-xl bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-xs font-semibold cursor-pointer">
+                                <i class="fa-solid fa-plus"></i><span>Add Academic Card</span>
+                            </button>
+                        </div>
+
+                        <div id="academic-cards-list" class="space-y-4"></div>
+                    </div>
+
+                    <!-- Honors & Recognition -->
+                    <div class="glass rounded-2xl p-7 space-y-4">
+                        <div class="flex items-center justify-between gap-2">
+                            <h3 class="text-lg font-bold text-white flex items-center space-x-2.5">
+                                <i class="fa-solid fa-trophy text-amber-400"></i>
+                                <span data-editable="honors.sectionTitle">Honors &amp; Awards</span>
+                            </h3>
+                            <button onclick="openAddHonorModal()" class="admin-only items-center space-x-1 px-3 py-1.5 rounded-xl bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs font-semibold cursor-pointer">
+                                <i class="fa-solid fa-plus"></i><span>Add Award Badge</span>
+                            </button>
+                        </div>
+                        <ul id="honors-list" class="space-y-3 text-xs sm:text-sm text-slate-300"></ul>
+                    </div>
+                </div>
             </div>
-            <div class="p-5 rounded-2xl glass">
-                <div class="text-3xl sm:text-4xl font-black text-amber-300" data-editable="metrics.m4Val">99.9%</div>
-                <p class="text-xs sm:text-sm text-slate-400 mt-1" data-editable="metrics.m4Label">Production SLA (Splunk &amp; Datadog)</p>
+        </div>
+    </section>
+
+    <!-- 3. SKILLS SECTION -->
+    <section id="skills" class="py-24 px-5 sm:px-8 border-t border-emerald-950/80 bg-surface/60">
+        <div class="max-w-7xl mx-auto space-y-12">
+            <div class="flex flex-wrap items-end justify-between gap-4">
+                <div class="space-y-2">
+                    <span class="font-mono text-xs text-amber-400 uppercase tracking-widest" data-editable="skills.eyebrow">// CORE CAPABILITIES</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white" data-editable="skills.heading">Engineering &amp; AI Leadership Skills</h2>
+                </div>
+                <button onclick="openAddSkillCategoryModal()" class="admin-only items-center space-x-2 px-4 py-2 rounded-xl bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs font-semibold cursor-pointer">
+                    <i class="fa-solid fa-plus"></i><span>Add Skill Category</span>
+                </button>
             </div>
+            <div id="core-skills-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </div>
     </section>
 
@@ -635,13 +743,13 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm">
                     <div class="space-y-2">
-                        <h4 class="font-mono text-xs uppercase tracking-wider text-amber-400 font-bold">Core Summary</h4>
+                        <h4 class="font-mono text-xs uppercase tracking-wider text-amber-400 font-bold" data-editable="resume.summaryLabel">Core Summary</h4>
                         <p data-editable="resume.summary" class="text-slate-300 leading-relaxed">
                             8+ years architecting scalable Java/Spring Boot/Quarkus, Python/FastAPI &amp; Node.js backends, JavaScript/React/Angular 16+ micro-frontends, and Agentic AI (MCP Servers, Multi-Subagents, RAG) with Splunk &amp; Datadog observability.
                         </p>
                     </div>
                     <div class="space-y-2">
-                        <h4 class="font-mono text-xs uppercase tracking-wider text-emerald-400 font-bold">Career Timeline</h4>
+                        <h4 class="font-mono text-xs uppercase tracking-wider text-emerald-400 font-bold" data-editable="resume.expLabel">Career Timeline</h4>
                         <ul class="text-slate-300 space-y-1.5">
                             <li data-editable="resume.exp1">Staff Engineer &amp; Tech Lead — Nagarro (2022–Present)</li>
                             <li data-editable="resume.exp2">Software Developer II &amp; Lead — Bluespacelabs (2020–2022)</li>
@@ -649,13 +757,24 @@
                         </ul>
                     </div>
                     <div class="space-y-2">
-                        <h4 class="font-mono text-xs uppercase tracking-wider text-teal-400 font-bold">Education &amp; Honors</h4>
+                        <h4 class="font-mono text-xs uppercase tracking-wider text-teal-400 font-bold" data-editable="resume.eduLabel">Education &amp; Honors</h4>
                         <ul class="text-slate-300 space-y-1.5">
                             <li data-editable="resume.edu1">B.Tech IT, GCECT Kolkata (7.96 CGPA) | HSE 68% | SE 80%</li>
                             <li data-editable="resume.edu2">97.6% Quarkus size reduction &amp; 6-app Module Federation</li>
                             <li data-editable="resume.edu3">Employee of the Year (2020–21) &amp; Barclays Hackathon 3rd Place</li>
                         </ul>
                     </div>
+                </div>
+
+                <!-- Dynamic Custom Resume Blocks -->
+                <div class="pt-4 border-t border-slate-800/80 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="font-mono text-xs uppercase tracking-wider text-amber-300 font-bold">Core Stack &amp; Additional Resume Highlights</span>
+                        <button onclick="openAddResumeBlockModal()" class="admin-only items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs font-semibold cursor-pointer">
+                            <i class="fa-solid fa-plus"></i><span>Add Resume Block</span>
+                        </button>
+                    </div>
+                    <div id="resume-custom-blocks" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm"></div>
                 </div>
             </div>
         </div>
@@ -666,35 +785,23 @@
         <div class="max-w-4xl mx-auto glass-gold rounded-3xl p-8 sm:p-12 text-center space-y-6 relative overflow-hidden">
             <div class="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/20 blur-3xl rounded-full pointer-events-none"></div>
             <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-amber-500/15 blur-3xl rounded-full pointer-events-none"></div>
-            <span class="font-mono text-xs text-amber-400 uppercase tracking-widest">// GET IN TOUCH</span>
+            <span class="font-mono text-xs text-amber-400 uppercase tracking-widest" data-editable="contact.eyebrow">// GET IN TOUCH</span>
             <h2 class="text-3xl sm:text-4xl font-black text-white" data-editable="contact.heading">Let's Build Your Next Enterprise or Freelance Product</h2>
             <p data-editable="contact.subheading" class="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
                 Available for Staff / Principal Engineering roles as well as Freelance MVP builds, Custom Agentic AI / MCP integrations, and Cloud Architecture consulting.
             </p>
-            <div class="flex flex-wrap justify-center gap-4 pt-3">
-                <a href="mailto:sikder.dinesh2@gmail.com?subject=Opportunity%20/%20Project%20Inquiry%20for%20Dinesh%20Sikder" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-amber-500 hover:from-emerald-400 hover:to-amber-400 text-slate-950 font-extrabold text-sm transition shadow-lg shadow-emerald-600/25 flex items-center space-x-2">
-                    <i class="fa-solid fa-envelope"></i>
-                    <span data-editable="contact.emailBtn">sikder.dinesh2@gmail.com</span>
-                </a>
-                <a href="tel:+919903561546" class="px-6 py-3.5 rounded-xl glass hover:bg-slate-800 text-slate-100 font-semibold text-sm transition flex items-center space-x-2">
-                    <i class="fa-solid fa-phone text-emerald-400"></i>
-                    <span data-editable="contact.phoneBtn">+91 99035 61546</span>
-                </a>
-                <a href="https://www.linkedin.com/in/dineshh-sikderr-42886111a/" target="_blank" rel="noopener" class="px-6 py-3.5 rounded-xl glass hover:bg-slate-800 text-slate-100 font-semibold text-sm transition flex items-center space-x-2">
-                    <i class="fa-brands fa-linkedin text-amber-400"></i>
-                    <span>LinkedIn</span>
-                </a>
-                <a href="https://github.com/Dineshsikder" target="_blank" rel="noopener" class="px-6 py-3.5 rounded-xl glass hover:bg-slate-800 text-slate-100 font-semibold text-sm transition flex items-center space-x-2">
-                    <i class="fa-brands fa-github text-emerald-400"></i>
-                    <span>GitHub</span>
-                </a>
+            <div id="contact-links-container" class="flex flex-wrap justify-center gap-4 pt-3"></div>
+            <div class="pt-2">
+                <button onclick="openAddContactLinkModal()" class="admin-only items-center space-x-2 px-4 py-2 rounded-xl bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs font-semibold cursor-pointer">
+                    <i class="fa-solid fa-plus"></i><span>Add Contact Button</span>
+                </button>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="py-8 px-5 border-t border-emerald-950/60 text-center text-xs text-slate-500">
-        <p>&copy; 2026 Dinesh Sikder. Powered by GitHub Repository CMS.</p>
+        <p data-editable="footer.copyright">&copy; 2026 Dinesh Sikder. Powered by GitHub Repository CMS.</p>
     </footer>
 
     <!-- Client-Side GitHub Repository CMS Engine + Portfolio State -->
@@ -702,9 +809,8 @@
         const ALLOWED_OWNER = 'dineshsikder';
         const DEFAULT_REPO = 'Dineshsikder/Dineshsikder.github.io';
         const DATA_FILE_PATH = 'portfolio-data.json';
-        // Pre-configured defaults (can be overridden anytime via the Setup Gear in the modal)
         const DEFAULT_OAUTH_CLIENT_ID = '';
-        const DEFAULT_OAUTH_WORKER_URL = '';
+        const DEFAULT_CORS_RELAY = 'https://corsproxy.io/?';
 
         // Bespoke Emerald & Gold Executive SVG Avatar Fallback
         const DEFAULT_SVG_AVATAR = `
@@ -753,6 +859,40 @@
                 "JavaScript (ES6+) / React / Angular 16+",
                 "Splunk & Datadog"
             ],
+            kpis: [
+                { value: "8+ Yrs", label: "Full-Stack, Cloud & AI Experience", colorClass: "text-white" },
+                { value: "97.6%", label: "Cloud Footprint Saved via Quarkus", colorClass: "text-amber-400" },
+                { value: "16+", label: "Engineers Led in Agile Delivery", colorClass: "text-emerald-400" },
+                { value: "99.9%", label: "Production SLA (Splunk & Datadog)", colorClass: "text-amber-300" }
+            ],
+            academics: [
+                {
+                    period: "2014 – 2018",
+                    score: "7.96 CGPA",
+                    degree: "B.Tech in Information Technology",
+                    institution: "Government College of Engineering and Ceramic Technology (MAKAUT), Kolkata",
+                    highlight: true
+                },
+                {
+                    period: "Higher Secondary (12th / HSE)",
+                    score: "68%",
+                    degree: "Science Stream (WBBHSE)",
+                    institution: "New Barrackpore Colony Boys' High School, Kolkata",
+                    highlight: false
+                },
+                {
+                    period: "Secondary Examination (10th / SE)",
+                    score: "80%",
+                    degree: "Madhyamik Pariksha (WBBSE)",
+                    institution: "New Barrackpore Colony Boys' High School, Kolkata",
+                    highlight: false
+                }
+            ],
+            honors: [
+                { icon: "fa-award", color: "text-amber-400", text: "Employee of the Year (2020–2021) — Bluespacelabs Pvt. Ltd. for technical leadership & Quarkus cloud optimization." },
+                { icon: "fa-medal", color: "text-emerald-400", text: "3rd Place Winner — Barclays Hackathon Challenge (2019) for rapid React.js & Spring Boot application engineering." },
+                { icon: "fa-star", color: "text-teal-400", text: "Multiple Cheerboard & Client Excellence Awards at Nagarro & Cognizant." }
+            ],
             experiences: [
                 {
                     role: "Staff Engineer & Technical Lead",
@@ -776,11 +916,43 @@
                     borderClass: "border-l-teal-500"
                 }
             ],
-            coreSkills: [
-                { icon: "fa-robot", title: "Agentic AI & MCP Systems", desc: "Designing custom autonomous agents, supervisor-subagent hierarchies, Model Context Protocol (MCP) tool servers, and production RAG pipelines." },
-                { icon: "fa-cubes", title: "Distributed Microservices", desc: "Architecting event-driven backends with Java Spring Boot, Quarkus, Python FastAPI, Node.js, Apache Kafka, and Zero-Trust OAuth 2.0 gateways." },
-                { icon: "fa-code", title: "Federated Micro-Frontends", desc: "Building modular web applications with JavaScript (ES6+), TypeScript, React.js, Angular 16+, RxJS, NgRx, and Webpack 5 Module Federation." },
-                { icon: "fa-chart-line", title: "Cloud FinOps & Observability", desc: "Multi-cloud delivery (AWS, Azure, GCP) with Terraform IaC, Docker/Kubernetes, CI/CD automation, and full-stack telemetry via Splunk & Datadog." }
+            skillCategories: [
+                {
+                    title: "Languages & Core Engineering",
+                    accent: "text-amber-300",
+                    barColor: "bg-emerald-500",
+                    items: [
+                        { name: "Java (Core, Java 8/17+, OOPS)", pct: 95 },
+                        { name: "JavaScript (ES6+) & Node.js", pct: 92 },
+                        { name: "TypeScript (Angular 16+ / React.js)", pct: 90 },
+                        { name: "Python & FastAPI", pct: 90 },
+                        { name: "REST APIs, Microservices & Git", pct: 95 }
+                    ]
+                },
+                {
+                    title: "Agentic AI, MCP & Cloud",
+                    accent: "text-emerald-300",
+                    barColor: "bg-amber-500",
+                    items: [
+                        { name: "Agentic AI & Multi-Subagent Systems", pct: 90 },
+                        { name: "MCP Servers & Custom AI Agents", pct: 88 },
+                        { name: "RAG Pipelines & LLM Orchestration", pct: 90 },
+                        { name: "SQL / NoSQL (PostgreSQL, MySQL, Mongo, Redis)", pct: 88 },
+                        { name: "Splunk, Datadog, AWS & Terraform", pct: 90 }
+                    ]
+                },
+                {
+                    title: "Leadership & Engineering Mindset",
+                    accent: "text-amber-300",
+                    barColor: "bg-emerald-500",
+                    items: [
+                        { name: "Communication & Client Handling", pct: 95 },
+                        { name: "Teamwork & Squad Leadership (16+)", pct: 99 },
+                        { name: "Accountability & Ownership", pct: 99 },
+                        { name: "Problem-Solving & Production Debugging", pct: 95 },
+                        { name: "Architecture Design & Mentorship", pct: 96 }
+                    ]
+                }
             ],
             technologies: [
                 {
@@ -839,7 +1011,9 @@
                     title: "Luminate Online Cloud Fundraising Suite",
                     desc: "Mission-critical cloud fundraising, advocacy campaign management, and personalized donor engagement platform serving millions of constituents across major US non-profits.",
                     impact: "Java Spring Boot microservices, Python/FastAPI ETL workers, Node.js services, and Angular 16+ UI deployed across AWS & Azure with Splunk & Datadog observability.",
-                    tags: ["Java / Spring Boot", "Python / FastAPI", "Node.js / Angular 16+", "Splunk & Datadog"]
+                    tags: ["Java / Spring Boot", "Python / FastAPI", "Node.js / Angular 16+", "Splunk & Datadog"],
+                    repoUrl: "https://github.com/Dineshsikder?tab=repositories",
+                    demoUrl: "https://dineshsikder.github.io/"
                 },
                 {
                     badge: "Conversational AI & Event Mesh",
@@ -847,7 +1021,9 @@
                     title: "Bluwyre Omnichannel AI Chatbot Engine",
                     desc: "Real-time automated customer engagement platform bridging WhatsApp Business APIs with intelligent NLP intent engines and asynchronous microservice workflows.",
                     impact: "AWS Lex, Lambda, Botpress & Node.js orchestrated via Apache Kafka event streams, secured behind Keycloak OAuth 2.0 API Gateway.",
-                    tags: ["AWS Lex & Lambda", "Node.js / Kafka", "Keycloak RBAC", "Prometheus/Grafana"]
+                    tags: ["AWS Lex & Lambda", "Node.js / Kafka", "Keycloak RBAC", "Prometheus/Grafana"],
+                    repoUrl: "https://github.com/Dineshsikder?tab=repositories",
+                    demoUrl: ""
                 },
                 {
                     badge: "Telecom E-Commerce • PCCW",
@@ -855,7 +1031,9 @@
                     title: "Aquila Federated Micro-Frontend Portal",
                     desc: "High-scale telecom storefront uniting six independent Angular 9 and React.js micro-applications running across separate IP environments into a unified host shell.",
                     impact: "Webpack 5 Module Federation host container + React/TypeScript remotes + Java Spring Boot & MySQL microservices on GCP.",
-                    tags: ["React.js / ES6+", "Module Federation", "Spring Boot / GCP"]
+                    tags: ["React.js / ES6+", "Module Federation", "Spring Boot / GCP"],
+                    repoUrl: "https://github.com/Dineshsikder?tab=repositories",
+                    demoUrl: ""
                 },
                 {
                     badge: "Cloud FinOps & Zero-Trust Security",
@@ -863,13 +1041,16 @@
                     title: "Quarkus Cloud Migration & API Gateway",
                     desc: "Migrated memory-heavy JVM microservices to Quarkus and built a reusable Spring Boot security & multi-tenant utility JAR distributed via GitHub Packages.",
                     impact: "Reduced deployment artifact size by 97.6% (625 MB -> 15 MB) and enforced JWT introspection, IP whitelisting & rate limiting.",
-                    tags: ["Quarkus", "OAuth 2.0 / JWT", "GitHub Packages"]
+                    tags: ["Quarkus", "OAuth 2.0 / JWT", "GitHub Packages"],
+                    repoUrl: "https://github.com/Dineshsikder?tab=repositories",
+                    demoUrl: ""
                 }
             ],
             freelance: [
                 {
                     badge: "Agentic AI & MCP Server",
                     metric: "65% Ticket Reduction",
+                    icon: "fa-robot",
                     title: "Custom Multi-Subagent AI Assistant & MCP Tool Server",
                     desc: "Architected a supervisor-subagent AI platform in Python & FastAPI with custom Model Context Protocol (MCP) servers connecting private PDFs, SQL databases, and CRM APIs with automated WhatsApp & React chat escalation.",
                     tags: ["Python / FastAPI", "MCP Servers", "Multi-Subagents", "LangGraph / RAG"]
@@ -877,6 +1058,7 @@
                 {
                     badge: "Full-Stack SaaS MVP",
                     metric: "End-to-End Delivery",
+                    icon: "fa-layer-group",
                     title: "Multi-Tenant Booking & Subscription SaaS Platform",
                     desc: "Built and launched a multi-tenant web platform with role-based analytics dashboards, automated billing webhooks, and JWT/OAuth security using React, Node.js, Spring Boot, and PostgreSQL.",
                     tags: ["React / Next.js", "Node.js / Spring Boot", "PostgreSQL", "Docker / AWS"]
@@ -884,6 +1066,7 @@
                 {
                     badge: "Cloud FinOps & APM",
                     metric: "70%+ Infra Savings",
+                    icon: "fa-cloud-arrow-up",
                     title: "AWS Infrastructure Audit, Terraform IaC & Splunk/Datadog APM",
                     desc: "Right-sized containerized microservices, automated zero-downtime deployments via GitHub Actions + Terraform, and configured real-time Splunk & Datadog alerting dashboards.",
                     tags: ["AWS & Terraform", "Quarkus / Docker", "Splunk & Datadog"]
@@ -891,6 +1074,7 @@
                 {
                     badge: "E-Commerce & AI Search",
                     metric: "+32% Conversion Lift",
+                    icon: "fa-bolt",
                     title: "Headless Storefront & FastAPI AI Recommendation Engine",
                     desc: "Developed a high-speed JavaScript/React storefront paired with a Node.js gateway and Python/FastAPI collaborative filtering recommendation service backed by Redis caching.",
                     tags: ["JavaScript / React", "Node.js", "Python / FastAPI ML", "Redis Cache"]
@@ -901,12 +1085,29 @@
                 { title: "AWS & Terraform Blueprints", desc: "Production Infrastructure-as-Code templates and automated GitHub Actions CI/CD workflows for multi-cloud container deployments.", lang: "Terraform / HCL", tag: "AWS / CI-CD", url: "https://github.com/Dineshsikder?tab=repositories" },
                 { title: "Carbon Footprint Analytics", desc: "Interactive sustainability analytics web application computing real-time environmental impact metrics across lifestyle and energy inputs.", lang: "TypeScript / React", tag: "Analytics", url: "https://github.com/Dineshsikder?tab=repositories" },
                 { title: "Real-Time Weather Engine", desc: "Asynchronous weather forecasting application integrating live geospatial telemetry APIs with responsive multi-location dashboards.", lang: "JavaScript (ES6+)", tag: "Live API", url: "https://github.com/Dineshsikder?tab=repositories" }
+            ],
+            resumeBlocks: [
+                {
+                    title: "Core Technical Stack Summary",
+                    content: "AI & Agents: Agentic AI, MCP Servers, Custom AI Agents, Multi-Subagent Systems (LangGraph, CrewAI, Spring AI), RAG, AWS Lex, Botpress. Backend: Java 8/17+, Spring Boot, Quarkus, Python, FastAPI, Flask, Node.js, Kafka. Frontend: JavaScript (ES6+), TypeScript, React.js, Angular 16+, Module Federation."
+                },
+                {
+                    title: "Cloud, Observability & Security",
+                    content: "Multi-Cloud: AWS, Azure, GCP, Terraform IaC, Docker, Kubernetes, GitHub Actions, Jenkins CI/CD. Observability & APM: Splunk, Datadog, Prometheus, Grafana, ELK Stack. Security: Keycloak OAuth 2.0, JWT Introspection, RBAC, API Gateway."
+                }
+            ],
+            contactLinks: [
+                { label: "sikder.dinesh2@gmail.com", url: "mailto:sikder.dinesh2@gmail.com?subject=Opportunity%20/%20Project%20Inquiry%20for%20Dinesh%20Sikder", icon: "fa-solid fa-envelope", primary: true },
+                { label: "+91 99035 61546", url: "tel:+919903561546", icon: "fa-solid fa-phone", primary: false },
+                { label: "LinkedIn", url: "https://www.linkedin.com/in/dineshh-sikderr-42886111a/", icon: "fa-brands fa-linkedin", primary: false },
+                { label: "GitHub", url: "https://github.com/Dineshsikder", icon: "fa-brands fa-github", primary: false }
             ]
         };
 
         let isAdminMode = false;
         let currentSkillFilter = 'all';
         let pendingAvatarUpload = null; // { filename, base64Content, dataUrl }
+        let devicePollTimer = null;
 
         function showToast(message, isError = false) {
             const toast = document.getElementById('cms-toast');
@@ -959,9 +1160,45 @@
             const badgesContainer = document.getElementById('hero-badges-container');
             badgesContainer.innerHTML = portfolioState.heroBadges.map((b, idx) => `
                 <span class="px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-200 inline-flex items-center space-x-1.5">
-                    <span>${escapeHtml(b)}</span>
+                    <span contenteditable="${isAdminMode}" onblur="updatePrimitiveArray('heroBadges', ${idx}, this.innerText)">${escapeHtml(b)}</span>
                     <button onclick="removeArrayItem('heroBadges', ${idx})" class="admin-only text-rose-400 hover:text-rose-300 ml-1 cursor-pointer" title="Remove">&times;</button>
                 </span>
+            `).join('');
+
+            // KPI Metrics Strip
+            const kpiGrid = document.getElementById('kpi-metrics-grid');
+            kpiGrid.innerHTML = portfolioState.kpis.map((kpi, idx) => `
+                <div class="p-5 rounded-2xl glass relative">
+                    <button onclick="removeArrayItem('kpis', ${idx})" class="admin-only absolute top-3 right-3 text-rose-400 hover:text-rose-300 text-xs cursor-pointer" title="Remove KPI"><i class="fa-solid fa-trash"></i></button>
+                    <div class="text-3xl sm:text-4xl font-black ${kpi.colorClass || 'text-white'}" contenteditable="${isAdminMode}" onblur="updateArrayField('kpis', ${idx}, 'value', this.innerText)">${escapeHtml(kpi.value)}</div>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-1" contenteditable="${isAdminMode}" onblur="updateArrayField('kpis', ${idx}, 'label', this.innerText)">${escapeHtml(kpi.label)}</p>
+                </div>
+            `).join('');
+
+            // Academic Cards List
+            const academicList = document.getElementById('academic-cards-list');
+            academicList.innerHTML = portfolioState.academics.map((ac, idx) => `
+                <div class="p-4 rounded-xl bg-black/50 border ${ac.highlight ? 'border-emerald-500/25' : 'border-slate-800'} space-y-1 relative">
+                    <button onclick="removeArrayItem('academics', ${idx})" class="admin-only absolute top-3 right-3 text-rose-400 hover:text-rose-300 text-xs cursor-pointer" title="Remove Academic Card"><i class="fa-solid fa-trash"></i></button>
+                    <div class="flex items-center justify-between pr-6">
+                        <span class="font-mono text-xs ${ac.highlight ? 'text-amber-400' : 'text-slate-400'}" contenteditable="${isAdminMode}" onblur="updateArrayField('academics', ${idx}, 'period', this.innerText)">${escapeHtml(ac.period)}</span>
+                        <span class="font-mono text-xs px-2.5 py-0.5 rounded ${ac.highlight ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'} font-bold" contenteditable="${isAdminMode}" onblur="updateArrayField('academics', ${idx}, 'score', this.innerText)">${escapeHtml(ac.score)}</span>
+                    </div>
+                    <h4 class="font-bold text-white text-sm sm:text-base" contenteditable="${isAdminMode}" onblur="updateArrayField('academics', ${idx}, 'degree', this.innerText)">${escapeHtml(ac.degree)}</h4>
+                    <p class="text-xs text-slate-300" contenteditable="${isAdminMode}" onblur="updateArrayField('academics', ${idx}, 'institution', this.innerText)">${escapeHtml(ac.institution)}</p>
+                </div>
+            `).join('');
+
+            // Honors & Awards List
+            const honorsList = document.getElementById('honors-list');
+            honorsList.innerHTML = portfolioState.honors.map((hn, idx) => `
+                <li class="flex items-start justify-between gap-2">
+                    <div class="flex items-start space-x-3 flex-1">
+                        <span class="${hn.color || 'text-amber-400'} mt-0.5"><i class="fa-solid ${hn.icon || 'fa-award'}"></i></span>
+                        <span contenteditable="${isAdminMode}" onblur="updateArrayField('honors', ${idx}, 'text', this.innerText)">${escapeHtml(hn.text)}</span>
+                    </div>
+                    <button onclick="removeArrayItem('honors', ${idx})" class="admin-only text-rose-400 hover:text-rose-300 text-xs cursor-pointer shrink-0"><i class="fa-solid fa-trash"></i></button>
+                </li>
             `).join('');
 
             // Experience List
@@ -975,6 +1212,37 @@
                     </div>
                     <p class="text-xs font-semibold text-emerald-400" contenteditable="${isAdminMode}" onblur="updateArrayField('experiences', ${idx}, 'company', this.innerText)">${escapeHtml(exp.company)}</p>
                     <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" contenteditable="${isAdminMode}" onblur="updateArrayField('experiences', ${idx}, 'description', this.innerText)">${escapeHtml(exp.description)}</p>
+                </div>
+            `).join('');
+
+            // Skill Categories with Editable/Addable/Deletable Progress Bars
+            const coreSkillsGrid = document.getElementById('core-skills-grid');
+            coreSkillsGrid.innerHTML = portfolioState.skillCategories.map((cat, catIdx) => `
+                <div class="glass glass-hover rounded-2xl p-6 space-y-4 transition duration-300 relative">
+                    <button onclick="removeArrayItem('skillCategories', ${catIdx})" class="admin-only absolute top-4 right-4 text-rose-400 hover:text-rose-300 text-xs cursor-pointer" title="Delete Skill Category"><i class="fa-solid fa-trash"></i></button>
+                    <h3 class="font-bold ${cat.accent || 'text-amber-300'} text-sm uppercase tracking-wider pr-6" contenteditable="${isAdminMode}" onblur="updateArrayField('skillCategories', ${catIdx}, 'title', this.innerText)">${escapeHtml(cat.title)}</h3>
+                    <div class="space-y-3 text-xs">
+                        ${cat.items.map((item, itemIdx) => `
+                            <div class="space-y-1">
+                                <div class="flex items-center justify-between gap-2">
+                                    <span class="text-slate-200" contenteditable="${isAdminMode}" onblur="updateSkillBarName(${catIdx}, ${itemIdx}, this.innerText)">${escapeHtml(item.name)}</span>
+                                    <div class="flex items-center space-x-1.5 shrink-0">
+                                        <span class="text-emerald-400 font-mono">${item.pct}%</span>
+                                        <button onclick="removeSkillBar(${catIdx}, ${itemIdx})" class="admin-only text-rose-400 hover:text-rose-300 cursor-pointer" title="Remove Skill Bar">&times;</button>
+                                    </div>
+                                </div>
+                                <div class="w-full bg-slate-800 rounded-full h-1.5">
+                                    <div class="${cat.barColor || 'bg-emerald-500'} h-1.5 rounded-full transition-all" style="width:${Math.min(100, Math.max(0, Number(item.pct) || 0))}%"></div>
+                                </div>
+                                <div class="admin-only items-center space-x-2 pt-0.5">
+                                    <input type="range" min="10" max="100" value="${item.pct}" oninput="updateSkillBarPct(${catIdx}, ${itemIdx}, this.value)" class="w-full accent-emerald-400 cursor-pointer h-1">
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button onclick="openAddSkillBarModal(${catIdx})" class="admin-only items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-xs font-mono cursor-pointer">
+                        <i class="fa-solid fa-plus"></i><span>Add Skill Bar</span>
+                    </button>
                 </div>
             `).join('');
 
@@ -1034,8 +1302,23 @@
                             <strong class="text-white">Stack &amp; Impact:</strong> <span contenteditable="${isAdminMode}" onblur="updateArrayField('projects', ${idx}, 'impact', this.innerText)">${escapeHtml(proj.impact)}</span>
                         </div>
                     </div>
-                    <div class="flex flex-wrap gap-2 pt-2">
-                        ${proj.tags.map(t => `<span class="font-mono text-xs px-2.5 py-1 rounded bg-slate-900 text-emerald-300">${escapeHtml(t)}</span>`).join('')}
+                    <div class="space-y-3 pt-2">
+                        <div class="flex flex-wrap gap-2 items-center">
+                            ${proj.tags.map((t, tIdx) => `
+                                <span class="font-mono text-xs px-2.5 py-1 rounded bg-slate-900 text-emerald-300 inline-flex items-center">
+                                    <span>${escapeHtml(t)}</span>
+                                    <button onclick="removeNestedTag('projects', ${idx}, ${tIdx})" class="admin-only text-rose-400 ml-1.5 cursor-pointer">&times;</button>
+                                </span>
+                            `).join('')}
+                            <button onclick="promptAddNestedTag('projects', ${idx})" class="admin-only px-2.5 py-1 rounded bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-xs font-mono cursor-pointer">+ Tag</button>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-emerald-950/60 text-xs font-semibold">
+                            <div class="flex items-center space-x-4">
+                                ${proj.repoUrl ? `<a href="${escapeHtml(proj.repoUrl)}" target="_blank" rel="noopener" class="text-emerald-400 hover:text-emerald-300 transition"><i class="fa-brands fa-github mr-1"></i>Repository</a>` : ''}
+                                ${proj.demoUrl ? `<a href="${escapeHtml(proj.demoUrl)}" target="_blank" rel="noopener" class="text-amber-400 hover:text-amber-300 transition"><i class="fa-solid fa-arrow-up-right-from-square mr-1"></i>Live Demo</a>` : ''}
+                            </div>
+                            <button onclick="promptEditProjectLinks(${idx})" class="admin-only text-amber-300 hover:text-white font-mono text-[11px] cursor-pointer"><i class="fa-solid fa-link mr-1"></i>Edit Links</button>
+                        </div>
                     </div>
                 </div>
             `).join('');
@@ -1053,8 +1336,14 @@
                         <h3 class="text-xl font-bold text-white" contenteditable="${isAdminMode}" onblur="updateArrayField('freelance', ${idx}, 'title', this.innerText)">${escapeHtml(fl.title)}</h3>
                         <p class="text-sm text-slate-300 leading-relaxed" contenteditable="${isAdminMode}" onblur="updateArrayField('freelance', ${idx}, 'desc', this.innerText)">${escapeHtml(fl.desc)}</p>
                     </div>
-                    <div class="flex flex-wrap gap-1.5 pt-3 border-t border-amber-500/15 font-mono text-xs">
-                        ${fl.tags.map(t => `<span class="px-2.5 py-1 rounded bg-black/50 text-amber-300">${escapeHtml(t)}</span>`).join('')}
+                    <div class="flex flex-wrap gap-1.5 pt-3 border-t border-amber-500/15 font-mono text-xs items-center">
+                        ${fl.tags.map((t, tIdx) => `
+                            <span class="px-2.5 py-1 rounded bg-black/50 text-amber-300 inline-flex items-center">
+                                <span>${escapeHtml(t)}</span>
+                                <button onclick="removeNestedTag('freelance', ${idx}, ${tIdx})" class="admin-only text-rose-400 ml-1.5 cursor-pointer">&times;</button>
+                            </span>
+                        `).join('')}
+                        <button onclick="promptAddNestedTag('freelance', ${idx})" class="admin-only px-2.5 py-1 rounded bg-amber-500/20 border border-amber-400/50 text-amber-300 text-xs font-mono cursor-pointer">+ Tag</button>
                     </div>
                 </div>
             `).join('');
@@ -1067,17 +1356,47 @@
                     <div class="space-y-3">
                         <div class="flex items-center justify-between text-slate-400 pr-6">
                             <i class="fa-regular fa-folder-open text-amber-400 text-xl"></i>
-                            <a href="${escapeHtml(rp.url)}" target="_blank" rel="noopener" class="text-slate-300 hover:text-white"><i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>
+                            <div class="flex items-center space-x-2">
+                                <button onclick="promptEditRepoUrl(${idx})" class="admin-only text-amber-300 hover:text-white font-mono text-[11px] cursor-pointer">Edit URL</button>
+                                <a href="${escapeHtml(rp.url)}" target="_blank" rel="noopener" class="text-slate-300 hover:text-white"><i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>
+                            </div>
                         </div>
                         <h3 class="text-lg font-bold text-white" contenteditable="${isAdminMode}" onblur="updateArrayField('repos', ${idx}, 'title', this.innerText)">${escapeHtml(rp.title)}</h3>
                         <p class="text-xs text-slate-400 leading-relaxed" contenteditable="${isAdminMode}" onblur="updateArrayField('repos', ${idx}, 'desc', this.innerText)">${escapeHtml(rp.desc)}</p>
                     </div>
                     <div class="flex items-center justify-between pt-3 border-t border-slate-800/80 font-mono text-[11px] text-slate-400">
-                        <span class="text-amber-300">&bull; ${escapeHtml(rp.lang)}</span>
-                        <span>${escapeHtml(rp.tag)}</span>
+                        <span class="text-amber-300" contenteditable="${isAdminMode}" onblur="updateArrayField('repos', ${idx}, 'lang', this.innerText)">&bull; ${escapeHtml(rp.lang)}</span>
+                        <span contenteditable="${isAdminMode}" onblur="updateArrayField('repos', ${idx}, 'tag', this.innerText)">${escapeHtml(rp.tag)}</span>
                     </div>
                 </div>
             `).join('');
+
+            // Custom Resume Blocks
+            const resumeBlocksGrid = document.getElementById('resume-custom-blocks');
+            resumeBlocksGrid.innerHTML = portfolioState.resumeBlocks.map((rb, idx) => `
+                <div class="p-4 rounded-xl bg-black/40 border border-slate-800 space-y-1.5 relative">
+                    <button onclick="removeArrayItem('resumeBlocks', ${idx})" class="admin-only absolute top-3 right-3 text-rose-400 hover:text-rose-300 text-xs cursor-pointer"><i class="fa-solid fa-trash"></i></button>
+                    <h5 class="font-mono text-xs font-bold text-emerald-400 uppercase pr-6" contenteditable="${isAdminMode}" onblur="updateArrayField('resumeBlocks', ${idx}, 'title', this.innerText)">${escapeHtml(rb.title)}</h5>
+                    <p class="text-xs text-slate-300 leading-relaxed" contenteditable="${isAdminMode}" onblur="updateArrayField('resumeBlocks', ${idx}, 'content', this.innerText)">${escapeHtml(rb.content)}</p>
+                </div>
+            `).join('');
+
+            // Contact Links Container
+            const contactContainer = document.getElementById('contact-links-container');
+            contactContainer.innerHTML = portfolioState.contactLinks.map((cl, idx) => {
+                const btnStyle = cl.primary
+                    ? 'bg-gradient-to-r from-emerald-500 to-amber-500 hover:from-emerald-400 hover:to-amber-400 text-slate-950 font-extrabold shadow-lg shadow-emerald-600/25'
+                    : 'glass hover:bg-slate-800 text-slate-100 font-semibold';
+                return `
+                <div class="inline-flex items-center space-x-1">
+                    <a href="${escapeHtml(cl.url)}" ${cl.url.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} class="px-6 py-3.5 rounded-xl ${btnStyle} text-sm transition flex items-center space-x-2">
+                        <i class="${escapeHtml(cl.icon || 'fa-solid fa-link')}"></i>
+                        <span contenteditable="${isAdminMode}" onclick="if(isAdminMode){event.preventDefault();}" onblur="updateArrayField('contactLinks', ${idx}, 'label', this.innerText)">${escapeHtml(cl.label)}</span>
+                    </a>
+                    <button onclick="promptEditContactLink(${idx})" title="Edit Link URL" class="admin-only w-8 h-8 rounded-lg glass text-amber-300 items-center justify-center text-xs cursor-pointer"><i class="fa-solid fa-pen"></i></button>
+                    <button onclick="removeArrayItem('contactLinks', ${idx})" title="Delete Button" class="admin-only w-8 h-8 rounded-lg glass text-rose-400 items-center justify-center text-xs cursor-pointer">&times;</button>
+                </div>`;
+            }).join('');
 
             syncEditableAttributes();
         }
@@ -1109,6 +1428,12 @@
             }
         }
 
+        function updatePrimitiveArray(arrayName, index, value) {
+            if (portfolioState[arrayName] && portfolioState[arrayName][index] !== undefined) {
+                portfolioState[arrayName][index] = value.trim();
+            }
+        }
+
         function removeArrayItem(arrayName, index) {
             portfolioState[arrayName].splice(index, 1);
             renderAllSections();
@@ -1120,30 +1445,173 @@
             renderAllSections();
         }
 
-        // Modal Helpers for Adding New Items
-        function openAddModal(title, fieldsHtml, onConfirm) {
-            document.getElementById('add-modal-title').innerText = title;
-            document.getElementById('add-modal-fields').innerHTML = fieldsHtml;
-            const confirmBtn = document.getElementById('add-modal-confirm');
-            confirmBtn.onclick = () => {
-                onConfirm();
-                closeAddModal();
-                renderAllSections();
-                showToast('Added! Click "Publish Live to GitHub" to make visible to everyone.');
-            };
-            document.getElementById('cms-add-modal').classList.remove('hidden');
+        function removeNestedTag(arrayName, itemIdx, tagIdx) {
+            portfolioState[arrayName][itemIdx].tags.splice(tagIdx, 1);
+            renderAllSections();
         }
 
-        function closeAddModal() {
-            document.getElementById('cms-add-modal').classList.add('hidden');
+        function updateSkillBarName(catIdx, itemIdx, value) {
+            portfolioState.skillCategories[catIdx].items[itemIdx].name = value.trim();
         }
 
-        function promptAddHeroBadge() {
-            openAddModal('Add Hero Technology Pill', `
-                <input id="new-hero-badge" type="text" placeholder="e.g., CrewAI / LangGraph / Kubernetes" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+        function updateSkillBarPct(catIdx, itemIdx, value) {
+            portfolioState.skillCategories[catIdx].items[itemIdx].pct = Number(value);
+            renderAllSections();
+        }
+
+        function removeSkillBar(catIdx, itemIdx) {
+            portfolioState.skillCategories[catIdx].items.splice(itemIdx, 1);
+            renderAllSections();
+        }
+
+        function resetPortfolioToDefaults() {
+            localStorage.removeItem('ds_gh_oauth_token');
+            showToast('Reloading page to restore default repository state...');
+            setTimeout(() => window.location.reload(), 800);
+        }
+        function openAddSkillCategoryModal() {
+            openAddModal('Add Skill Category Card', `
+                <input id="nsc-title" type="text" placeholder="Category Title (e.g., DevOps & Observability)" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+                <input id="nsc-first-skill" type="text" placeholder="First Skill Name (e.g., Splunk & Datadog APM)" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+                <input id="nsc-first-pct" type="number" min="10" max="100" value="92" placeholder="Proficiency % (10-100)" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
             `, () => {
-                const val = document.getElementById('new-hero-badge').value.trim();
-                if (val) portfolioState.heroBadges.push(val);
+                const title = document.getElementById('nsc-title').value.trim();
+                const skillName = document.getElementById('nsc-first-skill').value.trim();
+                const pct = Number(document.getElementById('nsc-first-pct').value) || 90;
+                if (title) {
+                    portfolioState.skillCategories.push({
+                        title,
+                        accent: 'text-emerald-300',
+                        barColor: 'bg-emerald-500',
+                        items: skillName ? [{ name: skillName, pct }] : []
+                    });
+                }
+            });
+        }
+
+        function openAddSkillBarModal(catIdx) {
+            openAddModal('Add Skill Progress Bar', `
+                <input id="nsb-name" type="text" placeholder="Skill Name (e.g., Model Context Protocol / MCP)" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+                <input id="nsb-pct" type="number" min="10" max="100" value="90" placeholder="Proficiency % (10-100)" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+            `, () => {
+                const name = document.getElementById('nsb-name').value.trim();
+                const pct = Number(document.getElementById('nsb-pct').value) || 90;
+                if (name) {
+                    portfolioState.skillCategories[catIdx].items.push({ name, pct });
+                }
+            });
+        }
+
+        function openAddKpiModal() {
+            openAddModal('Add KPI Stat Card', `
+                <input id="nk-val" type="text" placeholder="Metric Value (e.g., 15+ or 99.99%)" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+                <input id="nk-label" type="text" placeholder="Metric Label (e.g., Enterprise Microservices Shipped)" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+            `, () => {
+                const value = document.getElementById('nk-val').value.trim();
+                const label = document.getElementById('nk-label').value.trim();
+                if (value && label) {
+                    portfolioState.kpis.push({ value, label, colorClass: 'text-emerald-400' });
+                }
+            });
+        }
+
+        function openAddAcademicModal() {
+            openAddModal('Add Academic / Certification Card', `
+                <input id="na-period" type="text" placeholder="Period or Level (e.g., 2025 or Certification)" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+                <input id="na-score" type="text" placeholder="Score / Badge (e.g., 8.5 CGPA or Certified)" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+                <input id="na-degree" type="text" placeholder="Degree / Certification Title" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+                <input id="na-inst" type="text" placeholder="Institution / Issuing Body" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+            `, () => {
+                portfolioState.academics.push({
+                    period: document.getElementById('na-period').value.trim() || 'Certification',
+                    score: document.getElementById('na-score').value.trim() || 'Verified',
+                    degree: document.getElementById('na-degree').value.trim(),
+                    institution: document.getElementById('na-inst').value.trim(),
+                    highlight: true
+                });
+            });
+        }
+
+        function openAddHonorModal() {
+            openAddModal('Add Honor / Award Badge', `
+                <input id="nh-text" type="text" placeholder="Award or Recognition Description" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+            `, () => {
+                const text = document.getElementById('nh-text').value.trim();
+                if (text) portfolioState.honors.push({ icon: 'fa-award', color: 'text-amber-400', text });
+            });
+        }
+
+        function promptAddNestedTag(arrayName, itemIdx) {
+            openAddModal('Add Technology Tag', `
+                <input id="nnt-tag" type="text" placeholder="e.g., FastAPI / MCP / Redis" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+            `, () => {
+                const val = document.getElementById('nnt-tag').value.trim();
+                if (val) portfolioState[arrayName][itemIdx].tags.push(val);
+            });
+        }
+
+        function promptEditProjectLinks(idx) {
+            const proj = portfolioState.projects[idx];
+            openAddModal('Edit Project Repository & Demo URLs', `
+                <label class="block font-mono text-slate-300">GitHub Repository URL</label>
+                <input id="epl-repo" type="text" value="${escapeHtml(proj.repoUrl || '')}" placeholder="https://github.com/Dineshsikder/..." class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+                <label class="block font-mono text-slate-300">Live Demo URL (optional)</label>
+                <input id="epl-demo" type="text" value="${escapeHtml(proj.demoUrl || '')}" placeholder="https://..." class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+            `, () => {
+                proj.repoUrl = document.getElementById('epl-repo').value.trim();
+                proj.demoUrl = document.getElementById('epl-demo').value.trim();
+            });
+        }
+
+        function promptEditRepoUrl(idx) {
+            const rp = portfolioState.repos[idx];
+            openAddModal('Edit GitHub Repository URL', `
+                <input id="eru-url" type="text" value="${escapeHtml(rp.url || '')}" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+            `, () => {
+                rp.url = document.getElementById('eru-url').value.trim();
+            });
+        }
+
+        function openAddResumeBlockModal() {
+            openAddModal('Add Custom Resume Highlight Block', `
+                <input id="nrb-title" type="text" placeholder="Block Title (e.g., Certifications & Patents)" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+                <textarea id="nrb-content" rows="3" placeholder="Details..." class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white"></textarea>
+            `, () => {
+                portfolioState.resumeBlocks.push({
+                    title: document.getElementById('nrb-title').value.trim(),
+                    content: document.getElementById('nrb-content').value.trim()
+                });
+            });
+        }
+
+        function openAddContactLinkModal() {
+            openAddModal('Add Contact / Social Button', `
+                <input id="ncl-label" type="text" placeholder="Button Label (e.g., WhatsApp / Calendly / X)" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+                <input id="ncl-url" type="text" placeholder="URL (e.g., https://wa.me/919903561546)" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+                <input id="ncl-icon" type="text" value="fa-solid fa-link" placeholder="FontAwesome Icon Class" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+            `, () => {
+                portfolioState.contactLinks.push({
+                    label: document.getElementById('ncl-label').value.trim(),
+                    url: document.getElementById('ncl-url').value.trim(),
+                    icon: document.getElementById('ncl-icon').value.trim() || 'fa-solid fa-link',
+                    primary: false
+                });
+            });
+        }
+
+        function promptEditContactLink(idx) {
+            const cl = portfolioState.contactLinks[idx];
+            openAddModal('Edit Contact Button URL & Icon', `
+                <label class="block font-mono text-slate-300">Button Label</label>
+                <input id="ecl-label" type="text" value="${escapeHtml(cl.label)}" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+                <label class="block font-mono text-slate-300">Target URL</label>
+                <input id="ecl-url" type="text" value="${escapeHtml(cl.url)}" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+                <label class="block font-mono text-slate-300">FontAwesome Icon Class</label>
+                <input id="ecl-icon" type="text" value="${escapeHtml(cl.icon)}" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white">
+            `, () => {
+                cl.label = document.getElementById('ecl-label').value.trim();
+                cl.url = document.getElementById('ecl-url').value.trim();
+                cl.icon = document.getElementById('ecl-icon').value.trim();
             });
         }
 
@@ -1295,13 +1763,34 @@
             showToast('Avatar reset to vector portrait. Publish to save globally.');
         }
 
-        // GitHub 1-Click OAuth Sign-In & Owner Verification
-        function getOAuthConfig() {
+        // GitHub Referrer Detection + Zero-Backend Device Flow Sign-In
+        function detectGitHubOwnerReferrer() {
+            if (isAdminMode) return;
+            const ref = (document.referrer || '').toLowerCase();
+            const params = new URLSearchParams(window.location.search);
+            const isOwnerParam = params.get('owner') === '1' || params.get('edit') === '1';
+            const isFromOwnerRepo = ref.includes('github.com/dineshsikder');
+            if (isFromOwnerRepo || isOwnerParam) {
+                const banner = document.getElementById('owner-referrer-banner');
+                if (banner) banner.classList.remove('hidden');
+            }
+        }
+
+        function getDeviceFlowConfig() {
             return {
                 clientId: (localStorage.getItem('ds_gh_client_id') || DEFAULT_OAUTH_CLIENT_ID).trim(),
-                workerUrl: (localStorage.getItem('ds_gh_worker_url') || DEFAULT_OAUTH_WORKER_URL).trim().replace(/\/$/, ''),
+                corsRelay: localStorage.getItem('ds_gh_cors_relay') !== null
+                    ? localStorage.getItem('ds_gh_cors_relay').trim()
+                    : DEFAULT_CORS_RELAY,
                 repo: (localStorage.getItem('ds_gh_repo') || DEFAULT_REPO).trim()
             };
+        }
+
+        function buildRelayedUrl(targetUrl, relayPrefix) {
+            if (!relayPrefix) return targetUrl;
+            return relayPrefix.endsWith('?') || relayPrefix.endsWith('/')
+                ? `${relayPrefix}${encodeURIComponent(targetUrl)}`
+                : `${relayPrefix}/${encodeURIComponent(targetUrl)}`;
         }
 
         function openGitHubLoginModal() {
@@ -1309,88 +1798,143 @@
                 document.getElementById('admin-cms-bar').classList.remove('hidden');
                 return;
             }
-            const cfg = getOAuthConfig();
+            const cfg = getDeviceFlowConfig();
             document.getElementById('gh-client-id-input').value = cfg.clientId;
-            document.getElementById('gh-worker-url-input').value = cfg.workerUrl;
+            document.getElementById('gh-cors-relay-input').value = cfg.corsRelay;
             document.getElementById('gh-repo-input').value = cfg.repo;
-            if (!cfg.clientId || !cfg.workerUrl) {
-                document.getElementById('oauth-config-panel').classList.remove('hidden');
+            if (!cfg.clientId) {
+                document.getElementById('device-config-panel').classList.remove('hidden');
             }
             document.getElementById('gh-login-modal').classList.remove('hidden');
         }
 
         function closeGitHubLoginModal() {
+            if (devicePollTimer) {
+                clearInterval(devicePollTimer);
+                devicePollTimer = null;
+            }
             document.getElementById('gh-login-modal').classList.add('hidden');
         }
 
-        function toggleOAuthConfigPanel() {
-            document.getElementById('oauth-config-panel').classList.toggle('hidden');
+        function toggleDeviceConfigPanel() {
+            document.getElementById('device-config-panel').classList.toggle('hidden');
         }
 
-        function saveOAuthSettings() {
+        function saveDeviceFlowSettings() {
             const clientId = document.getElementById('gh-client-id-input').value.trim();
-            const workerUrl = document.getElementById('gh-worker-url-input').value.trim().replace(/\/$/, '');
+            const corsRelay = document.getElementById('gh-cors-relay-input').value.trim();
             const repo = document.getElementById('gh-repo-input').value.trim() || DEFAULT_REPO;
-            if (!clientId || !workerUrl) {
-                showToast('Please enter both your GitHub OAuth Client ID and Worker URL.', true);
+            if (!clientId) {
+                showToast('Please enter your GitHub OAuth App Client ID.', true);
                 return;
             }
             localStorage.setItem('ds_gh_client_id', clientId);
-            localStorage.setItem('ds_gh_worker_url', workerUrl);
+            localStorage.setItem('ds_gh_cors_relay', corsRelay);
             localStorage.setItem('ds_gh_repo', repo);
-            document.getElementById('oauth-config-panel').classList.add('hidden');
-            showToast('GitHub OAuth configuration saved! Click "Continue with GitHub".');
+            document.getElementById('device-config-panel').classList.add('hidden');
+            showToast('GitHub OAuth Client ID saved! Click "Generate GitHub Verification Code".');
         }
 
-        function startGitHubOAuthFlow() {
-            const cfg = getOAuthConfig();
-            if (!cfg.clientId || !cfg.workerUrl) {
-                document.getElementById('oauth-config-panel').classList.remove('hidden');
-                showToast('Enter your GitHub OAuth App Client ID & Token Worker URL once to enable 1-click sign-in.', true);
+        function copyDeviceUserCode() {
+            const codeText = document.getElementById('device-user-code').innerText.trim();
+            const temp = document.createElement('textarea');
+            temp.value = codeText;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            showToast(`Copied device code ${codeText} to clipboard!`);
+        }
+
+        async function startGitHubDeviceFlow() {
+            const cfg = getDeviceFlowConfig();
+            if (!cfg.clientId) {
+                document.getElementById('device-config-panel').classList.remove('hidden');
+                showToast('Enter your GitHub OAuth App Client ID once to start Device Flow.', true);
                 return;
             }
-            const csrfState = Math.random().toString(36).substring(2) + Date.now().toString(36);
-            sessionStorage.setItem('ds_gh_oauth_state', csrfState);
-            const redirectUri = window.location.origin + window.location.pathname;
-            const authUrl = `https://github.com/login/oauth/authorize?client_id=${encodeURIComponent(cfg.clientId)}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=repo&state=${encodeURIComponent(csrfState)}`;
-            window.location.href = authUrl;
-        }
 
-        async function handleGitHubOAuthCallback() {
-            const params = new URLSearchParams(window.location.search);
-            const code = params.get('code');
-            const returnedState = params.get('state');
-            if (!code) return false;
-
-            const expectedState = sessionStorage.getItem('ds_gh_oauth_state');
-            sessionStorage.removeItem('ds_gh_oauth_state');
-            window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
-
-            if (!expectedState || returnedState !== expectedState) {
-                showToast('GitHub OAuth state mismatch. Please try signing in again.', true);
-                return false;
+            if (devicePollTimer) {
+                clearInterval(devicePollTimer);
+                devicePollTimer = null;
             }
 
-            const cfg = getOAuthConfig();
+            const btn = document.getElementById('gh-device-btn');
+            const origHtml = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i><span>Requesting Device Code...</span>`;
+
             try {
-                showToast('Completing GitHub OAuth sign-in...');
-                const exchangeRes = await fetch(cfg.workerUrl, {
+                const codeEndpoint = buildRelayedUrl('https://github.com/login/device/code', cfg.corsRelay);
+                const res = await fetch(codeEndpoint, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
                     body: JSON.stringify({
-                        code,
-                        redirect_uri: window.location.origin + window.location.pathname
+                        client_id: cfg.clientId,
+                        scope: 'repo'
                     })
                 });
-                const tokenPayload = await exchangeRes.json();
-                if (!exchangeRes.ok || !tokenPayload.access_token) {
-                    throw new Error(tokenPayload.error_description || tokenPayload.error || 'OAuth token exchange failed.');
+                const data = await res.json();
+                if (!res.ok || !data.device_code || !data.user_code) {
+                    throw new Error(data.error_description || data.error || 'Failed to initiate GitHub Device Flow.');
                 }
-                await verifyGitHubOwnerSession(tokenPayload.access_token);
-                return true;
+
+                document.getElementById('device-user-code').innerText = data.user_code;
+                const verifyLink = document.getElementById('device-verification-link');
+                verifyLink.href = data.verification_uri || 'https://github.com/login/device';
+                document.getElementById('device-code-box').classList.remove('hidden');
+                document.getElementById('device-poll-status').innerText = 'Waiting for GitHub authorization...';
+                copyDeviceUserCode();
+
+                let pollIntervalMs = ((data.interval || 5) + 1) * 1000;
+                const expiresAt = Date.now() + (data.expires_in || 900) * 1000;
+
+                devicePollTimer = setInterval(async () => {
+                    if (Date.now() > expiresAt) {
+                        clearInterval(devicePollTimer);
+                        devicePollTimer = null;
+                        document.getElementById('device-poll-status').innerText = 'Code expired. Click Generate again.';
+                        return;
+                    }
+                    try {
+                        const tokenEndpoint = buildRelayedUrl('https://github.com/login/oauth/access_token', cfg.corsRelay);
+                        const tokenRes = await fetch(tokenEndpoint, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                client_id: cfg.clientId,
+                                device_code: data.device_code,
+                                grant_type: 'urn:ietf:params:oauth:grant-type:device_code'
+                            })
+                        });
+                        const tokenData = await tokenRes.json();
+                        if (tokenData.access_token) {
+                            clearInterval(devicePollTimer);
+                            devicePollTimer = null;
+                            document.getElementById('device-code-box').classList.add('hidden');
+                            await verifyGitHubOwnerSession(tokenData.access_token);
+                        } else if (tokenData.error === 'slow_down') {
+                            pollIntervalMs += 5000;
+                        } else if (tokenData.error && tokenData.error !== 'authorization_pending') {
+                            clearInterval(devicePollTimer);
+                            devicePollTimer = null;
+                            document.getElementById('device-poll-status').innerText = tokenData.error_description || tokenData.error;
+                        }
+                    } catch (pollErr) {
+                        // Continue polling on transient network hiccups
+                    }
+                }, pollIntervalMs);
             } catch (err) {
-                showToast(`GitHub OAuth failed: ${err.message}`, true);
-                return false;
+                showToast(`GitHub Device Flow error: ${err.message}`, true);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = origHtml;
             }
         }
 
@@ -1414,6 +1958,7 @@
 
                 isAdminMode = true;
                 document.body.classList.add('admin-editing');
+                document.getElementById('owner-referrer-banner').classList.add('hidden');
                 document.getElementById('admin-cms-bar').classList.remove('hidden');
                 document.getElementById('admin-gh-user').innerText = user.login;
                 const avatarImg = document.getElementById('admin-gh-avatar');
@@ -1438,41 +1983,6 @@
             document.getElementById('nav-gh-login-label').innerText = 'Owner Sign-In';
             renderAllSections();
             showToast('Signed out of GitHub CMS Edit Mode.');
-        }
-
-        function copyWorkerTemplate() {
-            const workerCode = `export default {
-  async fetch(request, env) {
-    const cors = {
-      "Access-Control-Allow-Origin": "https://dineshsikder.github.io",
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type"
-    };
-    if (request.method === "OPTIONS") return new Response(null, { headers: cors });
-    const { code, redirect_uri } = await request.json();
-    const res = await fetch("https://github.com/login/oauth/access_token", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify({
-        client_id: env.GITHUB_CLIENT_ID,
-        client_secret: env.GITHUB_CLIENT_SECRET,
-        code,
-        redirect_uri
-      })
-    });
-    const data = await res.json();
-    return new Response(JSON.stringify(data), {
-      headers: { ...cors, "Content-Type": "application/json" }
-    });
-  }
-};`;
-            const temp = document.createElement('textarea');
-            temp.value = workerCode;
-            document.body.appendChild(temp);
-            temp.select();
-            document.execCommand('copy');
-            document.body.removeChild(temp);
-            showToast('Cloudflare Worker OAuth proxy code copied to clipboard!');
         }
 
         // Helper: Commit a file to GitHub Repository Contents API
@@ -1510,7 +2020,7 @@
         // One-Click Publish Changes to GitHub (Persists globally for all public visitors)
         async function publishChangesToGitHub() {
             const token = localStorage.getItem('ds_gh_oauth_token');
-            const repo = getOAuthConfig().repo || DEFAULT_REPO;
+            const repo = getDeviceFlowConfig().repo || DEFAULT_REPO;
             if (!token) {
                 openGitHubLoginModal();
                 return;
@@ -1581,6 +2091,16 @@
                 <div class="company">${escapeHtml(e.company)}</div>
                 <ul><li>${escapeHtml(e.description)}</li></ul>
             `).join('');
+            const customResumeSections = portfolioState.resumeBlocks.map(rb => `
+                <h2>${escapeHtml(rb.title)}</h2>
+                <p>${escapeHtml(rb.content)}</p>
+            `).join('');
+            const academicBullets = portfolioState.academics.map(ac =>
+                `<li><strong>${escapeHtml(ac.degree)}</strong> — ${escapeHtml(ac.institution)} (${escapeHtml(ac.score)}, ${escapeHtml(ac.period)})</li>`
+            ).join('');
+            const honorBullets = portfolioState.honors.map(hn =>
+                `<li>${escapeHtml(hn.text)}</li>`
+            ).join('');
 
             const resumeContent = `<!DOCTYPE html>
 <html lang="en">
@@ -1612,11 +2132,11 @@
   <ul>${techBullets}</ul>
   <h2>Professional Experience</h2>
   ${expBlocks}
+  ${customResumeSections}
   <h2>Education & Honors</h2>
   <ul>
-    <li><strong>B.Tech in Information Technology</strong> — Government College of Engineering and Ceramic Technology (MAKAUT), Kolkata (7.96 CGPA, 2018)</li>
-    <li><strong>Higher Secondary (12th / HSE):</strong> 68% | <strong>Secondary Examination (10th / SE):</strong> 80% — New Barrackpore Colony Boys' High School</li>
-    <li><strong>Awards:</strong> Employee of the Year (2020–2021) at Bluespacelabs Pvt. Ltd. | 3rd Place at Barclays Hackathon Challenge (2019)</li>
+    ${academicBullets}
+    ${honorBullets}
   </ul>
 </body>
 </html>`;
@@ -1642,13 +2162,11 @@
             }
 
             await loadLivePortfolioData();
+            detectGitHubOwnerReferrer();
 
-            const handledCallback = await handleGitHubOAuthCallback();
-            if (!handledCallback) {
-                const savedToken = localStorage.getItem('ds_gh_oauth_token');
-                if (savedToken) {
-                    await verifyGitHubOwnerSession(savedToken);
-                }
+            const savedToken = localStorage.getItem('ds_gh_oauth_token');
+            if (savedToken) {
+                await verifyGitHubOwnerSession(savedToken);
             }
         });
     </script>
