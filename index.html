@@ -133,42 +133,63 @@
     <!-- Custom Notification Toast -->
     <div id="cms-toast" class="fixed top-20 right-5 z-50 hidden max-w-sm glass-gold rounded-xl px-4 py-3 text-xs font-medium text-white shadow-2xl border border-emerald-400/50 transition-all"></div>
 
-    <!-- GitHub Owner Sign-In Modal -->
+    <!-- GitHub 1-Click OAuth Sign-In Modal -->
     <div id="gh-login-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="glass-gold rounded-3xl max-w-md w-full p-7 space-y-5 relative border border-amber-500/40 shadow-2xl">
-            <button onclick="closeGitHubLoginModal()" aria-label="Close Modal" class="absolute top-5 right-5 w-8 h-8 rounded-lg glass flex items-center justify-center text-slate-400 hover:text-white cursor-pointer">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div class="flex items-center space-x-3">
-                <div class="w-11 h-11 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-xl">
-                    <i class="fa-brands fa-github"></i>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold text-white">GitHub Repository CMS Sign-In</h3>
-                    <p class="text-xs text-slate-400">Restricted to repository owner <strong class="text-amber-300">@Dineshsikder</strong></p>
-                </div>
-            </div>
-
-            <div class="space-y-3 text-xs">
-                <div>
-                    <label class="block font-mono text-slate-300 mb-1">GitHub Repository (Owner/Repo)</label>
-                    <input id="gh-repo-input" type="text" value="Dineshsikder/Dineshsikder.github.io" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white font-mono focus:outline-none focus:border-emerald-400">
-                </div>
-                <div>
-                    <label class="block font-mono text-slate-300 mb-1">GitHub Personal Access Token (repo / contents:write)</label>
-                    <input id="gh-token-input" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white font-mono focus:outline-none focus:border-emerald-400">
-                    <p class="text-[11px] text-slate-400 mt-1.5 leading-relaxed">
-                        Your token is stored only in your browser's <code class="text-emerald-300">localStorage</code> and used exclusively to verify your GitHub identity and commit <code class="text-amber-300">portfolio-data.json</code> &amp; avatar updates directly to your repository.
-                    </p>
-                </div>
-            </div>
-
-            <div class="flex items-center justify-end space-x-3 pt-2">
-                <button onclick="closeGitHubLoginModal()" class="px-4 py-2.5 rounded-xl glass text-slate-300 text-xs font-semibold hover:text-white cursor-pointer">Cancel</button>
-                <button onclick="authenticateWithGitHub()" id="gh-auth-submit" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-amber-500 text-slate-950 font-extrabold text-xs hover:from-emerald-400 hover:to-amber-400 transition cursor-pointer flex items-center space-x-2">
-                    <i class="fa-brands fa-github"></i>
-                    <span>Verify &amp; Unlock Edit Mode</span>
+            <div class="absolute top-5 right-5 flex items-center space-x-2">
+                <button onclick="toggleOAuthConfigPanel()" title="Configure GitHub OAuth App & Worker" aria-label="OAuth Settings" class="w-8 h-8 rounded-lg glass flex items-center justify-center text-amber-300 hover:text-white cursor-pointer">
+                    <i class="fa-solid fa-gear"></i>
                 </button>
+                <button onclick="closeGitHubLoginModal()" aria-label="Close Modal" class="w-8 h-8 rounded-lg glass flex items-center justify-center text-slate-400 hover:text-white cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="flex items-center space-x-3 pr-16">
+                <div class="w-11 h-11 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-xl shrink-0">
+                    <i class="fa-brands fa-github"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Sign in with GitHub</h3>
+                    <p class="text-xs text-slate-400">1-Click OAuth verification for <strong class="text-amber-300">@Dineshsikder</strong></p>
+                </div>
+            </div>
+
+            <p class="text-xs text-slate-300 leading-relaxed">
+                Authenticate directly with your GitHub account—no manual Personal Access Token required. Once verified as <code class="text-emerald-300">@Dineshsikder</code>, inline editing and live publishing to <code class="text-amber-300">Dineshsikder.github.io</code> unlock automatically.
+            </p>
+
+            <!-- Collapsible One-Time OAuth App & Worker Setup -->
+            <div id="oauth-config-panel" class="hidden space-y-3 text-xs p-4 rounded-2xl bg-black/55 border border-emerald-900/60">
+                <div class="flex items-center justify-between">
+                    <span class="font-mono text-[11px] font-bold text-amber-300 uppercase">One-Time OAuth App Setup</span>
+                    <button onclick="copyWorkerTemplate()" class="text-[11px] font-mono text-emerald-400 hover:text-emerald-300 underline cursor-pointer">Copy Cloudflare Worker Code</button>
+                </div>
+                <div>
+                    <label class="block font-mono text-slate-300 mb-1">GitHub OAuth App Client ID</label>
+                    <input id="gh-client-id-input" type="text" placeholder="Ov23liXXXXXXXXXXXXXX" class="w-full px-3 py-2 rounded-xl bg-black/70 border border-slate-700 text-white font-mono focus:outline-none focus:border-emerald-400">
+                </div>
+                <div>
+                    <label class="block font-mono text-slate-300 mb-1">OAuth Token Exchange Worker URL</label>
+                    <input id="gh-worker-url-input" type="url" placeholder="https://github-oauth.dineshsikder.workers.dev" class="w-full px-3 py-2 rounded-xl bg-black/70 border border-slate-700 text-white font-mono focus:outline-none focus:border-emerald-400">
+                </div>
+                <div>
+                    <label class="block font-mono text-slate-300 mb-1">Target Repository</label>
+                    <input id="gh-repo-input" type="text" value="Dineshsikder/Dineshsikder.github.io" class="w-full px-3 py-2 rounded-xl bg-black/70 border border-slate-700 text-white font-mono focus:outline-none focus:border-emerald-400">
+                </div>
+                <button onclick="saveOAuthSettings()" class="w-full py-2 rounded-xl bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 font-bold hover:bg-emerald-500/30 transition cursor-pointer">
+                    Save OAuth Settings
+                </button>
+            </div>
+
+            <div class="space-y-2.5 pt-1">
+                <button onclick="startGitHubOAuthFlow()" id="gh-oauth-btn" class="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-emerald-500 to-amber-500 hover:from-emerald-400 hover:to-amber-400 text-slate-950 font-extrabold text-sm transition shadow-lg shadow-emerald-600/20 cursor-pointer flex items-center justify-center space-x-2.5">
+                    <i class="fa-brands fa-github text-lg"></i>
+                    <span>Continue with GitHub</span>
+                </button>
+                <div class="flex items-center justify-between text-[11px] text-slate-400 px-1">
+                    <span>Scope: <code class="text-slate-300">repo</code> (contents write)</span>
+                    <button onclick="toggleOAuthConfigPanel()" class="text-amber-300 hover:underline cursor-pointer">Configure Client ID / Worker</button>
+                </div>
             </div>
         </div>
     </div>
@@ -681,6 +702,9 @@
         const ALLOWED_OWNER = 'dineshsikder';
         const DEFAULT_REPO = 'Dineshsikder/Dineshsikder.github.io';
         const DATA_FILE_PATH = 'portfolio-data.json';
+        // Pre-configured defaults (can be overridden anytime via the Setup Gear in the modal)
+        const DEFAULT_OAUTH_CLIENT_ID = '';
+        const DEFAULT_OAUTH_WORKER_URL = '';
 
         // Bespoke Emerald & Gold Executive SVG Avatar Fallback
         const DEFAULT_SVG_AVATAR = `
@@ -1271,14 +1295,27 @@
             showToast('Avatar reset to vector portrait. Publish to save globally.');
         }
 
-        // GitHub Sign-In & Owner Verification
+        // GitHub 1-Click OAuth Sign-In & Owner Verification
+        function getOAuthConfig() {
+            return {
+                clientId: (localStorage.getItem('ds_gh_client_id') || DEFAULT_OAUTH_CLIENT_ID).trim(),
+                workerUrl: (localStorage.getItem('ds_gh_worker_url') || DEFAULT_OAUTH_WORKER_URL).trim().replace(/\/$/, ''),
+                repo: (localStorage.getItem('ds_gh_repo') || DEFAULT_REPO).trim()
+            };
+        }
+
         function openGitHubLoginModal() {
             if (isAdminMode) {
                 document.getElementById('admin-cms-bar').classList.remove('hidden');
                 return;
             }
-            const savedRepo = localStorage.getItem('ds_gh_repo');
-            if (savedRepo) document.getElementById('gh-repo-input').value = savedRepo;
+            const cfg = getOAuthConfig();
+            document.getElementById('gh-client-id-input').value = cfg.clientId;
+            document.getElementById('gh-worker-url-input').value = cfg.workerUrl;
+            document.getElementById('gh-repo-input').value = cfg.repo;
+            if (!cfg.clientId || !cfg.workerUrl) {
+                document.getElementById('oauth-config-panel').classList.remove('hidden');
+            }
             document.getElementById('gh-login-modal').classList.remove('hidden');
         }
 
@@ -1286,30 +1323,94 @@
             document.getElementById('gh-login-modal').classList.add('hidden');
         }
 
-        async function authenticateWithGitHub(silentToken = null) {
-            const token = silentToken || document.getElementById('gh-token-input').value.trim();
+        function toggleOAuthConfigPanel() {
+            document.getElementById('oauth-config-panel').classList.toggle('hidden');
+        }
+
+        function saveOAuthSettings() {
+            const clientId = document.getElementById('gh-client-id-input').value.trim();
+            const workerUrl = document.getElementById('gh-worker-url-input').value.trim().replace(/\/$/, '');
             const repo = document.getElementById('gh-repo-input').value.trim() || DEFAULT_REPO;
-            if (!token) {
-                showToast('Please enter your GitHub Personal Access Token.', true);
+            if (!clientId || !workerUrl) {
+                showToast('Please enter both your GitHub OAuth Client ID and Worker URL.', true);
                 return;
             }
+            localStorage.setItem('ds_gh_client_id', clientId);
+            localStorage.setItem('ds_gh_worker_url', workerUrl);
+            localStorage.setItem('ds_gh_repo', repo);
+            document.getElementById('oauth-config-panel').classList.add('hidden');
+            showToast('GitHub OAuth configuration saved! Click "Continue with GitHub".');
+        }
 
+        function startGitHubOAuthFlow() {
+            const cfg = getOAuthConfig();
+            if (!cfg.clientId || !cfg.workerUrl) {
+                document.getElementById('oauth-config-panel').classList.remove('hidden');
+                showToast('Enter your GitHub OAuth App Client ID & Token Worker URL once to enable 1-click sign-in.', true);
+                return;
+            }
+            const csrfState = Math.random().toString(36).substring(2) + Date.now().toString(36);
+            sessionStorage.setItem('ds_gh_oauth_state', csrfState);
+            const redirectUri = window.location.origin + window.location.pathname;
+            const authUrl = `https://github.com/login/oauth/authorize?client_id=${encodeURIComponent(cfg.clientId)}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=repo&state=${encodeURIComponent(csrfState)}`;
+            window.location.href = authUrl;
+        }
+
+        async function handleGitHubOAuthCallback() {
+            const params = new URLSearchParams(window.location.search);
+            const code = params.get('code');
+            const returnedState = params.get('state');
+            if (!code) return false;
+
+            const expectedState = sessionStorage.getItem('ds_gh_oauth_state');
+            sessionStorage.removeItem('ds_gh_oauth_state');
+            window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+
+            if (!expectedState || returnedState !== expectedState) {
+                showToast('GitHub OAuth state mismatch. Please try signing in again.', true);
+                return false;
+            }
+
+            const cfg = getOAuthConfig();
+            try {
+                showToast('Completing GitHub OAuth sign-in...');
+                const exchangeRes = await fetch(cfg.workerUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({
+                        code,
+                        redirect_uri: window.location.origin + window.location.pathname
+                    })
+                });
+                const tokenPayload = await exchangeRes.json();
+                if (!exchangeRes.ok || !tokenPayload.access_token) {
+                    throw new Error(tokenPayload.error_description || tokenPayload.error || 'OAuth token exchange failed.');
+                }
+                await verifyGitHubOwnerSession(tokenPayload.access_token);
+                return true;
+            } catch (err) {
+                showToast(`GitHub OAuth failed: ${err.message}`, true);
+                return false;
+            }
+        }
+
+        async function verifyGitHubOwnerSession(accessToken) {
+            if (!accessToken) return;
             try {
                 const res = await fetch('https://api.github.com/user', {
                     headers: {
-                        'Authorization': `Bearer ${token}`,
+                        'Authorization': `Bearer ${accessToken}`,
                         'Accept': 'application/vnd.github+json'
                     }
                 });
-                if (!res.ok) throw new Error('Invalid GitHub token or network error.');
+                if (!res.ok) throw new Error('GitHub session expired. Please sign in again.');
                 const user = await res.json();
 
                 if (user.login.toLowerCase() !== ALLOWED_OWNER) {
                     throw new Error(`Access denied: Signed in as @${user.login}, expected @Dineshsikder.`);
                 }
 
-                localStorage.setItem('ds_gh_token', token);
-                localStorage.setItem('ds_gh_repo', repo);
+                localStorage.setItem('ds_gh_oauth_token', accessToken);
 
                 isAdminMode = true;
                 document.body.classList.add('admin-editing');
@@ -1322,21 +1423,56 @@
 
                 closeGitHubLoginModal();
                 renderAllSections();
-                showToast(`Signed in as @${user.login}. Inline editing unlocked!`);
+                showToast(`Signed in via GitHub as @${user.login}. Inline editing unlocked!`);
             } catch (err) {
-                localStorage.removeItem('ds_gh_token');
+                localStorage.removeItem('ds_gh_oauth_token');
                 showToast(err.message, true);
             }
         }
 
         function logoutGitHubAdmin() {
-            localStorage.removeItem('ds_gh_token');
+            localStorage.removeItem('ds_gh_oauth_token');
             isAdminMode = false;
             document.body.classList.remove('admin-editing');
             document.getElementById('admin-cms-bar').classList.add('hidden');
             document.getElementById('nav-gh-login-label').innerText = 'Owner Sign-In';
             renderAllSections();
             showToast('Signed out of GitHub CMS Edit Mode.');
+        }
+
+        function copyWorkerTemplate() {
+            const workerCode = `export default {
+  async fetch(request, env) {
+    const cors = {
+      "Access-Control-Allow-Origin": "https://dineshsikder.github.io",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type"
+    };
+    if (request.method === "OPTIONS") return new Response(null, { headers: cors });
+    const { code, redirect_uri } = await request.json();
+    const res = await fetch("https://github.com/login/oauth/access_token", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        client_id: env.GITHUB_CLIENT_ID,
+        client_secret: env.GITHUB_CLIENT_SECRET,
+        code,
+        redirect_uri
+      })
+    });
+    const data = await res.json();
+    return new Response(JSON.stringify(data), {
+      headers: { ...cors, "Content-Type": "application/json" }
+    });
+  }
+};`;
+            const temp = document.createElement('textarea');
+            temp.value = workerCode;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            showToast('Cloudflare Worker OAuth proxy code copied to clipboard!');
         }
 
         // Helper: Commit a file to GitHub Repository Contents API
@@ -1373,8 +1509,8 @@
 
         // One-Click Publish Changes to GitHub (Persists globally for all public visitors)
         async function publishChangesToGitHub() {
-            const token = localStorage.getItem('ds_gh_token');
-            const repo = localStorage.getItem('ds_gh_repo') || DEFAULT_REPO;
+            const token = localStorage.getItem('ds_gh_oauth_token');
+            const repo = getOAuthConfig().repo || DEFAULT_REPO;
             if (!token) {
                 openGitHubLoginModal();
                 return;
@@ -1507,9 +1643,12 @@
 
             await loadLivePortfolioData();
 
-            const savedToken = localStorage.getItem('ds_gh_token');
-            if (savedToken) {
-                await authenticateWithGitHub(savedToken);
+            const handledCallback = await handleGitHubOAuthCallback();
+            if (!handledCallback) {
+                const savedToken = localStorage.getItem('ds_gh_oauth_token');
+                if (savedToken) {
+                    await verifyGitHubOwnerSession(savedToken);
+                }
             }
         });
     </script>
